@@ -7,7 +7,7 @@
 
 所以JVM本身其实也是个抽象的概念，可以说是一个负责解释编译满足规范的字节码平台，这里刚说的的编译又可以是一个抽象的概念，一般说高级语言通过编译器的编译称为前端编译，虚拟机对字节码的编译称为后端编译。
 既然是JVM是抽象的概念，实现起来也要规范的字节码，自然也就会有对JVM本身的规范，这样才有开源或闭源的不同的JVM实现。
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/02/2-2.png?raw=true" width="600"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/02/2-2.png?raw=true" width="500"></div>
 
 
 > ***计算机领域中的任何问题都可以通过加一个中间层来解决。***
