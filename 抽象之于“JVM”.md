@@ -1,5 +1,5 @@
 对与使用Java作为应用程序开发者来说，Java虚拟机不会陌生，而我之所以把“JVM”给加了引号，是想说JVM发展到今天，已经不再局限于“JVM（Java Virtual Machine）”。它本质上是对输入字节码的处理平台，JVM的一系列规范也是针对字节码而言，Java语言可以通过编译器编译出符合JVM规范的字节码，理论上其他语言也是完全可以这么做的，甚至你可以手写出一个满足JVM规范的字节码，JVM也不会区别对待的，事实上确实也是这样，已经有越来越多的这种语言在涌现，eg：kotlin、Scala等等，这些语言也可以称之为JVM语言。
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/02/2-1.png?raw=true" width="400"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/02/2-15.png?raw=true" width="400"></div>
 <div align=center>（此图来自维基百科）</div>
 
 
