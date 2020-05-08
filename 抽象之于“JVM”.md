@@ -1,5 +1,5 @@
 对与使用Java作为应用程序开发者来说，Java虚拟机不会陌生，而我之所以把“JVM”给加了引号，是想说JVM发展到今天，已经不再局限于“JVM（Java Virtual Machine）”。它本质上是对输入字节码的处理平台，JVM的一系列规范也是针对字节码而言，Java语言可以通过编译器编译出符合JVM规范的字节码，理论上其他语言也是完全可以这么做的，甚至你可以手写出一个满足JVM规范的字节码，JVM也不会区别对待的，事实上确实也是这样，已经有越来越多的这种语言在涌现，eg：kotlin、Scala等等，这些语言也可以称之为JVM语言。
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/02/2-15.png?raw=true" width="400"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/02/2-1.png?raw=true" width="400"></div>
 <div align=center>（此图来自维基百科）</div>
 
 
@@ -7,7 +7,7 @@
 
 所以JVM本身其实也是个抽象的概念，可以说是一个负责解释编译满足规范的字节码平台，这里刚说的的编译又可以是一个抽象的概念，一般说高级语言通过编译器的编译称为前端编译，虚拟机对字节码的编译称为后端编译。
 既然是JVM是抽象的概念，实现起来也要规范的字节码，自然也就会有对JVM本身的规范，这样才有开源或闭源的不同的JVM实现。
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/02/2-2.png?raw=true" width="500"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/02/2-15.png?raw=true" width="500"></div>
 
 <br>
   
