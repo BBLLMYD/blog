@@ -4,6 +4,7 @@
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/02/2-1.png?raw=true" width="400"></div>
 <div align=center>（此图来自维基百科）</div>
 
+<br>
 
 这是一个以“抽象”为主题的探讨，不太会深入的讨论某一个类加载器、回收算法、回收器之类，相对“具化”的内容会另起题且结合实践来探讨。
 
