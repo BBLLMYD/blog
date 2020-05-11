@@ -39,7 +39,7 @@ I/O的流程可分为两步：
 <br>
 
 **同步阻塞I/O**
-<br>
+<br><br>
 Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻塞的方式来进行，对进程的线程资源很不友好，当大量连接时容易将线程资源耗尽无法处理新的连接。但是系统调用次数较少，在流量不大且平稳的时候比较适用。
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-1.png?raw=true" width="444"></div>
@@ -48,7 +48,7 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 
 
 **同步非阻塞I/O**
-<br>
+<br><br>
 和上一个同步阻塞I/O相比，同步非阻塞I/O在第一阶段的阻塞等待变成轮询的方式，相对之下避免了一下线程消耗，但是系统调用次数过多，CPU消耗也比较明显，这种模型实际应用也比较少。
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-2.png?raw=true" width="444"></div>
@@ -56,7 +56,7 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 <br>
 
 **多路复用I/O模型**
-<br>
+<br><br>
 多路复用建立在系统提供的事件分离函数select，poll，epoll之上，先更新select的socket监控列表，然后等待函数返回（此过程是阻塞的），关于这几个系统函数实现方式的特性的不同，也是适用不同的场景下。但是多路复用I/O在上层的实际应用很多，像Java的NI/O，Redis以及Netty通信框架都采用了这种模型，不过像Netty框架在多路复用的基础上又做了一下zerocopy等一些更细致的有针对性的优化方案。<br>
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-3.png?raw=true" width="444"></div>
@@ -64,7 +64,7 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 <br>
 
 **信号驱动I/O**
-<br>
+<br><br>
 应用进程使用 sigactI/On 系统调用，内核立即返回，应用进程可以继续执行，也就是第一阶段是不阻塞的，等待系统向应用进程发送 SIGI/O信号，再来同步的向进程拷贝数据。CPU 利用率更高，但是过于依赖OS能力，在大量I/O操作的情况下可能造成信号队列溢出导致信号丢失，造成灾难性后果，所以实际应用也很少。
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-4.png?raw=true" width="444"></div>
@@ -72,7 +72,7 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 <br>
 
 **异步I/O**
-<br>
+<br><br>
 两个阶段都是不阻塞，第二阶段系统直接向进程通知I/O已经完成，此时进程可以直接使用数据。异步模型效率较高，但是还未足够成熟，同时也过于依赖操作系统，实际应用的也并不多。
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-5.png?raw=true" width="444"></div>
