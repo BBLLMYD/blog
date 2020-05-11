@@ -92,16 +92,22 @@ select 和 poll 的功能现实上大致相同，在一些实现细节上有所�
 * poll()提供了更多的事件类型，并且对描述符的重复利用上比select相对要高;
 ...
 <br>
+
 **select**
+<br>
+
 ````
 int select(int n, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
 ````
 **poll**
+<br>
+
 ````
 int poll(struct pollfd *fds, unsigned int nfds, int timeout);
 ````
 
 **epoll**
+<br>
 ````
 int epoll_create(int size);
 int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；
