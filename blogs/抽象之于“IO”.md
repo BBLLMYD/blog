@@ -20,9 +20,9 @@ I/O的流程可分为两步：
 * 2.从内核向进程copy数据
 
 **我们常讲的同步/异步指的其实是第二个动作，阻塞/非阻塞指的是第一个动作。**<br>
-各个I/O模型也是在两个步骤的实现方式不同而区分的。
+各个I/O模型也是在两个步骤的实现方式不同而区分的，大致是下图的思路。
 <br>
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/02/2-1.png?raw=true" width="400"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-7-7.png?raw=true" width="400"></div>
 
 <br>
 其中的信号驱动I/O和异步I/O实际上应用的比较少，它们的实现方式相对和操作系统更耦合而不可控是很大一部分原因。
