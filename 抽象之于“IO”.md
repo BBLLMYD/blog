@@ -91,7 +91,7 @@ select/poll/epoll做为实现I/O多路复用的手段，出现的时序是select
 select 和 poll 的功能现实上大致相同，在一些实现细节上有所不同：
 * select()会修改描述符，而poll()不会；
 * poll()提供了更多的事件类型，并且对描述符的重复利用上比select相对要高;
-...
+* ...
 <br>
 
 **select**
