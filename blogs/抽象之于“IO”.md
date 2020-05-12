@@ -115,5 +115,5 @@ epoll比select和poll更加灵活而且没有描述符数量限制。
 **上面三个实现虽然看起来像一个进化的过程，但并不是后面出现的一定比前面的好，事实他们的特性不同有各自的适用场景。**
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-8.png?raw=true" width="777"></div>
-<div align=center>异步I/O过程</div>
+<div align=center>适用场景</div>
 <br>
