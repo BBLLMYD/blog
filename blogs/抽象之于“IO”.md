@@ -87,7 +87,7 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 <br><br>
 可以比较直观的发现在两个阶段中，各个模型分别的处理方式
 <br>
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-9.png?raw=true" width="444"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-9.png?raw=true" width="555"></div>
 <div align=center>比较</div>
 <br>
 
@@ -141,7 +141,7 @@ epoll比select和poll更加灵活而且没有描述符数量限制。
 
 ### 3.关于“sendfile”、"mmap"的特性应用
 
-如果我们始终让CPU来进行各种数据传输工作，会特别浪费。一方面，我们的数据传输工作用不到多少CPU核新的“计算”功能。另一方面，CPU的运转速度也比I/O操作要快很多。
+如果我们始终让CPU来参与进行各种数据传输工作，会比较浪费。我们的数据传输工作用不到多少CPU核新的“计算”功能。另外CPU的运转速度和I/O操作的速度也并不匹配，会降低CPU的使用效率。
 
 
 #### 3.1 关于DMA
@@ -166,6 +166,7 @@ sendfile的实际应用很多，数据直接在内核完成输入和输出，不
 sendfile可以直接将Page Cache中某个fd的一部分数据传递给另外一个fd，而不用经过到用户空间的两次copy。其中sendfile(in,out)中的"in"只可以是从磁盘文件，而"out"可以是磁盘句柄也可以是socket句柄。
 kafka就是基于此特性实现了从broker向consumer传输数据过程的"零拷贝"（其实是减少了关于用户缓冲区的copy并且）。
 sendfile有一个天然的特性或者限制，就是应用层无法再对数据进行加工，而只能直接传输，而这种弊端在适合的场景下也有可能成为应用层的优势。
+下图是sendfile在读取本读数据发送到socket文件场景下的的一个应用实践。
 
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-123.png?raw=true" width="666"></div>
