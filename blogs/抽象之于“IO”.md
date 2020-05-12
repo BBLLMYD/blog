@@ -86,10 +86,7 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 
 select/poll/epoll做为实现I/O多路复用的手段，出现的时序是select->poll->epoll
 <br>
-select 和 poll 的功能现实上大致相同，在一些实现细节上有所不同：
-* select()会修改描述符，而poll()不会；
-* poll()提供了更多的事件类型，并且对描述符的重复利用上比select相对要高;
-* ...
+select 和 poll 的功能现实上大致相同，在一些实现细节上有所不同
 <br>
 
 **select**
@@ -116,3 +113,7 @@ epoll_ctl()函数用于向内核注册新的描述符或者是改变某个文件
 epoll比select和poll更加灵活而且没有描述符数量限制。
 
 **上面三个实现虽然看起来像一个进化的过程，但并不是后面出现的一定比前面的好，事实他们的特性不同有各自的适用场景。**
+<br>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-8.png?raw=true" width="777"></div>
+<div align=center>异步I/O过程</div>
+<br>
