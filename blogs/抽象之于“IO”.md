@@ -87,8 +87,8 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 <br><br>
 可以比较直观的发现在两个阶段中，各个模型分别的处理方式
 <br>
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-59.png?raw=true" width="444"></div>
-<div align=center style="font-size: 12px">比较</div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-9.png?raw=true" width="444"></div>
+<div align=center style="font-size: 6px">比较</div>
 <br>
 
 
