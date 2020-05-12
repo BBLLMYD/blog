@@ -24,7 +24,7 @@ I/O的流程可分为两步：
 **我们常讲的同步/异步指的其实是第二个动作，阻塞/非阻塞指的是第一个动作。**<br>
 各个I/O模型也是在两个步骤的实现方式不同而区分的，大致是下图的思路。
 <br>
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-7-7.png?raw=true" width="907"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-7-7.png?raw=true" width="937"></div>
 
 <br>
 其中的信号驱动I/O和异步I/O实际上应用的比较少，它们的实现方式相对和操作系统更耦合而不可控是很大一部分原因。
@@ -88,7 +88,7 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 可以比较直观的发现在两个阶段中，各个模型分别的处理方式
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-9.png?raw=true" width="444"></div>
-<div align=center font-size=6px>比较</div>
+<div align=center>比较</div>
 <br>
 
 
@@ -132,6 +132,6 @@ epoll比select和poll更加灵活而且没有描述符数量限制。
 
 **上面三个实现虽然看起来像一个进化的过程，但并不是后面出现的一定比前面的好，事实他们的特性不同有各自的适用场景。**
 <br>
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-8.png?raw=true" width="777"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-8.png?raw=true" width="997"></div>
 <div align=center>适用场景</div>
 <br>
