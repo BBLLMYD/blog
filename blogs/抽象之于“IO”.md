@@ -39,6 +39,7 @@ I/O的流程可分为两步：
 <br>
 
 <br>
+
 **1.同步阻塞I/O**
 <br><br>
 Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻塞的方式来进行，对进程的线程资源很不友好，当大量连接时容易将线程资源耗尽无法处理新的连接。但是系统调用次数较少，在流量不大且平稳的时候比较适用。
@@ -66,7 +67,7 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 
 **4.信号驱动I/O**
 <br><br>
-应用进程使用 sigactI/On 系统调用，内核立即返回，应用进程可以继续执行，也就是第一阶段是不阻塞的，等待系统向应用进程发送 SIGI/O信号，再来同步的向进程拷贝数据。CPU 利用率更高，但是过于依赖OS能力，在大量I/O操作的情况下可能造成信号队列溢出导致信号丢失，造成灾难性后果，所以实际应用也很少。
+应用进程使用 sigactI/On 系统调用，内核立即返回，应用进程可以继续执行，也就是第一阶段是不阻塞的，等待系统向应用进程发送 SIGI/O信号，再来同步的向进程拷贝数据。CPU 利用率更高，但是过于依赖OS能力，在大量I/O操作的情况下可能造成信号队列溢出导致信号丢失，造成严重后果，所以实际应用也很少。
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-4.png?raw=true" width="444"></div>
 <div align=center>信号驱动I/O过程</div>
@@ -85,7 +86,7 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 
 **总体比较**
 <br><br>
-可以比较直观的发现在两个阶段中，各个模型分别的处理方式
+可以比较直观的发现在两个阶段中，各个模型分别的处理方式和阻塞情况
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-9.png?raw=true" width="555"></div>
 <div align=center>比较</div>
@@ -167,6 +168,9 @@ sendfile的实际应用很多，数据直接在内核完成输入和输出，不
 **sendfile可以直接将Page Cache中某个fd的一部分数据传递给另外一个fd，而不用经过到用户空间的两次copy。其中sendfile(in,out)中的"in"只可以是从磁盘文件，而"out"可以是磁盘句柄也可以是socket句柄。**
 kafka就是基于此特性实现了从broker向consumer传输数据过程的"零拷贝"（其实是减少了关于用户缓冲区的copy并且）。
 sendfile有一个天然的特性或者限制，就是应用层无法再对数据进行加工，而只能直接传输，而这种弊端在适合的场景下也有可能成为应用层的优势。
+- 1.传统I/O ：硬盘—>内核缓冲区—>用户缓冲区—>内核socket缓冲区—>协议引擎
+
+- 2.sendfile（ DMA 收集拷贝）：硬盘—>内核缓冲区—>协议引擎
 下图是sendfile在读取本读数据发送到socket文件场景下的的一个应用实践。
 
 <br>
