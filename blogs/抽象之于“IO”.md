@@ -18,7 +18,7 @@
 - [关于“sendfile”、"mmap"的特性及应用场景](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CIO%E2%80%9D.md#3%E5%85%B3%E4%BA%8Esendfilemmap%E7%9A%84%E7%89%B9%E6%80%A7%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF)
 - [关于应用层对上述技术的实际应用](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CIO%E2%80%9D.md#4%E5%85%B3%E4%BA%8E%E5%BA%94%E7%94%A8%E5%B1%82%E5%AF%B9%E4%B8%8A%E8%BF%B0%E6%8A%80%E6%9C%AF%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8)
 
-尽量从抽象的角度来它们的特性、区别、联系及实际应用。
+尽量还是从抽象的角度来它们的特性、区别、联系及实际应用。
 
 
 * * *
