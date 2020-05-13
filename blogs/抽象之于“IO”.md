@@ -14,7 +14,7 @@
 ### 1.关于“IO”模型分类
 
 <br>
-这篇主要就讨论Linux下的关于网络I/O的内容展开做一些讨论，常被提及的同步/异步，阻塞/非阻塞网上有很多解释，我觉得主要是因为大家在解释这个问题的前置设定可能不一致，导致很多说法好像都对但看起来又好像不是一回事，明确了上下文来谈这两个问题才会更清晰。
+主要先就讨论Linux下的关于网络I/O的内容展开做一些讨论，常被提及的同步/异步，阻塞/非阻塞网上有很多解释，我觉得主要是因为大家在解释这个问题的前置设定可能不一致，导致很多说法好像都对但看起来又好像不是一回事，明确了上下文来谈这两个问题才会更清晰。
 I/O的流程可分为两步：
 <br>
 
@@ -170,7 +170,7 @@ sendfile有一个天然的特性或者限制，就是应用层无法再对数据
 下图是sendfile在读取本读数据发送到socket文件场景下的的一个应用实践。
 
 <br>
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-123.png?raw=true" width="666"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-123.png?raw=true" width="777"></div>
 <div align=center>sendfile()应用前后</div>
 <br>
 
