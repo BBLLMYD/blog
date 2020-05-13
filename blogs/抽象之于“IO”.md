@@ -11,12 +11,16 @@
 而不对OS和App之间的交互基础有足够多的了解，是很容易迷茫的。先了解关于OS与用户程序之间的通信的种种模式，
 才能根据我们的业务场景选型或实现更适合的通信组件。
 
-- [关于“IO”模型分类](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CIO%E2%80%9D.md#1%E5%85%B3%E4%BA%8Eio%E6%A8%A1%E5%9E%8B%E5%88%86%E7%B1%BB)
+下面是我们就IO相关部分内容按如下顺序分别做一些展开：
+
+- [关于“IO”模型分类](https://github.com/BBLLMYD/blog/blob/mastaolunter/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CIO%E2%80%9D.md#1%E5%85%B3%E4%BA%8Eio%E6%A8%A1%E5%9E%8B%E5%88%86%E7%B1%BB)
 - [关于“多路复用”几种实现](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CIO%E2%80%9D.md#2%E5%85%B3%E4%BA%8E%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%87%A0%E7%A7%8D%E5%AE%9E%E7%8E%B0)
 - [关于“sendfile”、"mmap"的特性及应用场景](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CIO%E2%80%9D.md#3%E5%85%B3%E4%BA%8Esendfilemmap%E7%9A%84%E7%89%B9%E6%80%A7%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF)
 - [关于应用层对上述技术的实际应用](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CIO%E2%80%9D.md#4%E5%85%B3%E4%BA%8E%E5%BA%94%E7%94%A8%E5%B1%82%E5%AF%B9%E4%B8%8A%E8%BF%B0%E6%8A%80%E6%9C%AF%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8)
 
 <br>
+尽量从抽象的角度来它们的特性、区别、联系及实际应用。
+<br><br>
 
 ### 1.关于“IO”模型分类
 
