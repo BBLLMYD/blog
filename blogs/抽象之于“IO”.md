@@ -54,7 +54,7 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 和上一个同步阻塞I/O相比，同步非阻塞I/O在第一阶段的阻塞等待变成轮询的方式，相对之下避免了一下线程消耗，但是系统调用次数过多，CPU消耗也比较明显，这种模型实际应用也比较少。
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-2.png?raw=true" width="444"></div>
-<div align=center>同步非阻塞I/O过程</div>
+<div align=center>同步非阻塞I/O</div>
 <br>
 
 **3.多路复用I/O模型**
@@ -62,7 +62,7 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 多路复用建立在系统提供的事件分离函数select，poll，epoll之上，先更新select的socket监控列表，然后等待函数返回（此过程是阻塞的），关于这几个系统函数实现方式的特性的不同，也是适用不同的场景下。但是多路复用I/O在上层的实际应用很多，像Java的NI/O，Redis以及Netty通信框架都采用了这种模型，不过像Netty框架在多路复用的基础上又做了一下zerocopy等一些更细致的有针对性的优化方案。<br>
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-3.png?raw=true" width="444"></div>
-<div align=center>多路复用I/O过程</div>
+<div align=center>多路复用I/O</div>
 <br>
 
 **4.信号驱动I/O**
@@ -70,7 +70,7 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 应用进程使用 sigactI/On 系统调用，内核立即返回，应用进程可以继续执行，也就是第一阶段是不阻塞的，等待系统向应用进程发送 SIGI/O信号，再来同步的向进程拷贝数据。CPU 利用率更高，但是过于依赖OS能力，在大量I/O操作的情况下可能造成信号队列溢出导致信号丢失，造成严重后果，所以实际应用也很少。
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-4.png?raw=true" width="444"></div>
-<div align=center>信号驱动I/O过程</div>
+<div align=center>信号驱动I/O</div>
 <br>
 
 **5.异步I/O**
@@ -78,7 +78,7 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 两个阶段都是不阻塞，第二阶段系统直接向进程通知I/O已经完成，此时进程可以直接使用数据。异步模型效率较高，但是还未足够成熟，同时也过于依赖操作系统，实际应用的也并不多。
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-5.png?raw=true" width="444"></div>
-<div align=center>异步I/O过程</div>
+<div align=center>异步I/O</div>
 <br>
 
 **为了低耦合，更可控，异步I/O和信号驱动I/O模型应用并不多见，更常见的是向对更灵活的多路复用和传统I/O模型。**
@@ -182,11 +182,14 @@ sendfile有一个天然的特性或者限制，就是应用层无法再对数据
 <div align=center>sendfile()应用前后</div>
 <br>
 
-关于实现零拷贝总要依赖的底层技术实现通常包括但是不限于直接内存读写、DMA拷贝、sendfile()。
+
+#### 优化手段比较
+
+**应用层关于实现磁盘/网络IO的"零拷贝"优化总要依赖的底层技术实现通常包括但是不限于 直接内存映射、直接内存读写、DMA拷贝、sendfile()等手段，他们分别有着不同的适用场景供上层应用来封装，同时也或多或少着存在一些弊端需要注意。**
 
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-11.png?raw=true" width="777"></div>
-<div align=center>sendfile()应用前后</div>
+<div align=center>IO过程优化</div>
 <br>
 
 
