@@ -6,7 +6,7 @@
 
 <br>
 
-这是一个以“抽象”为主题的探讨，不太会深入的讨论某一个类加载器、回收算法、回收器之类，相对“具化”的内容会另起题且结合实践来探讨。
+这是一个以“抽象”为主题的探讨，不太会过于深入讨论某一个类加载器、回收算法、回收器之类，相对“具化”的内容会另起题且结合实践来探讨。
 
 所以JVM本身其实也是个抽象的概念，可以说是一个负责解释编译满足规范的字节码平台，这里刚说的的编译又可以是一个抽象的概念，一般说高级语言通过编译器的编译称为前端编译，虚拟机对字节码的编译称为后端编译。
 既然是JVM是抽象的概念，实现起来也要规范的字节码，自然也就会有对JVM本身的规范，这样才有开源或闭源的不同的JVM实现。
@@ -26,8 +26,16 @@
 
 从JVM初始加载字节码开始，整个类加载的过程，运行时区域布局，对象的实例化、定位、判断是否可回收，回收的算法等等，每一个步骤都可以拿出来单独展开大篇幅的讨论，而且真的结合实际环境出现的形形色色问题来看，就真的是魔鬼藏在细节里，没有对JVM的架构足够了解和实际经验的累积，往往都会是很棘手的问题。
 
-就尽量从抽象的方式来谈一谈关于JVM的一部分内容，包括：[类加载](https://github.com/BBLLMYD/blog/blob/master/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CJVM%E2%80%9D.md#1%E5%85%B3%E4%BA%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD)、[内存布局](https://github.com/BBLLMYD/blog/blob/master/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CJVM%E2%80%9D.md#2%E5%85%B3%E4%BA%8E%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80)、[内存模型](https://github.com/BBLLMYD/blog/blob/master/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CJVM%E2%80%9D.md#3%E5%85%B3%E4%BA%8E%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8Bjmm)、[运行期优化](https://github.com/BBLLMYD/blog/blob/master/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CJVM%E2%80%9D.md#4%E5%85%B3%E4%BA%8E%E8%BF%90%E8%A1%8C%E6%9C%9F%E4%BC%98%E5%8C%96)、[垃圾收集](https://github.com/BBLLMYD/blog/blob/master/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CJVM%E2%80%9D.md#5%E5%85%B3%E4%BA%8E%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86)、[处理工具](https://github.com/BBLLMYD/blog/blob/master/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CJVM%E2%80%9D.md#5%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7)等方面分别展开从抽象的角度来进行一些讨论。
-    
+就尽量从抽象的角度来谈一谈关于JVM的部分内容，包括：
+
+- [类加载](https://github.com/BBLLMYD/blog/blob/master/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CJVM%E2%80%9D.md#1%E5%85%B3%E4%BA%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD)
+- [内存布局](https://github.com/BBLLMYD/blog/blob/master/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CJVM%E2%80%9D.md#2%E5%85%B3%E4%BA%8E%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80)
+- [内存模型](https://github.com/BBLLMYD/blog/blob/master/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CJVM%E2%80%9D.md#3%E5%85%B3%E4%BA%8E%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8Bjmm)
+- [运行期优化](https://github.com/BBLLMYD/blog/blob/master/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CJVM%E2%80%9D.md#4%E5%85%B3%E4%BA%8E%E8%BF%90%E8%A1%8C%E6%9C%9F%E4%BC%98%E5%8C%96)
+- [垃圾收集](https://github.com/BBLLMYD/blog/blob/master/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CJVM%E2%80%9D.md#5%E5%85%B3%E4%BA%8E%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86)
+- [处理工具](https://github.com/BBLLMYD/blog/blob/master/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CJVM%E2%80%9D.md#5%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7)
+
+
 * * *
 
 ### 1.关于“类加载”

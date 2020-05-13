@@ -11,10 +11,23 @@
 而不对OS和App之间的交互基础有足够多的了解，是很容易迷茫的。先了解关于OS与用户程序之间的通信的种种模式，
 才能根据我们的业务场景选型或实现更适合的通信组件。
 
+下面是我们就IO相关部分内容按如下顺序分别做一些展开讨论：
+
+- [关于“IO”模型分类](https://github.com/BBLLMYD/blog/blob/mastaolunter/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CIO%E2%80%9D.md#1%E5%85%B3%E4%BA%8Eio%E6%A8%A1%E5%9E%8B%E5%88%86%E7%B1%BB)
+- [关于“多路复用”几种实现](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CIO%E2%80%9D.md#2%E5%85%B3%E4%BA%8E%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%87%A0%E7%A7%8D%E5%AE%9E%E7%8E%B0)
+- [关于“sendfile”、"mmap"的特性及应用场景](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CIO%E2%80%9D.md#3%E5%85%B3%E4%BA%8Esendfilemmap%E7%9A%84%E7%89%B9%E6%80%A7%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF)
+- [关于应用层对上述技术的实际应用](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CIO%E2%80%9D.md#4%E5%85%B3%E4%BA%8E%E5%BA%94%E7%94%A8%E5%B1%82%E5%AF%B9%E4%B8%8A%E8%BF%B0%E6%8A%80%E6%9C%AF%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8)
+
+尽量还是从抽象的角度来它们的特性、区别、联系及实际应用。
+
+
+* * *
+
+
 ### 1.关于“IO”模型分类
 
 <br>
-这篇主要就讨论Linux下的关于网络I/O的内容展开做一些讨论，常被提及的同步/异步，阻塞/非阻塞网上有很多解释，我觉得主要是因为大家在解释这个问题的前置设定可能不一致，导致很多说法好像都对但看起来又好像不是一回事，明确了上下文来谈这两个问题才会更清晰。
+主要先就讨论Linux下的关于网络I/O的内容展开做一些讨论，常被提及的同步/异步，阻塞/非阻塞网上有很多解释，我觉得主要是因为大家在解释这个问题的前置设定可能不一致，导致很多说法好像都对但看起来又好像不是一回事，明确了上下文来谈这两个问题才会更清晰。
 I/O的流程可分为两步：
 <br>
 
@@ -39,6 +52,7 @@ I/O的流程可分为两步：
 <br>
 
 <br>
+
 **1.同步阻塞I/O**
 <br><br>
 Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻塞的方式来进行，对进程的线程资源很不友好，当大量连接时容易将线程资源耗尽无法处理新的连接。但是系统调用次数较少，在流量不大且平稳的时候比较适用。
@@ -53,7 +67,7 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 和上一个同步阻塞I/O相比，同步非阻塞I/O在第一阶段的阻塞等待变成轮询的方式，相对之下避免了一下线程消耗，但是系统调用次数过多，CPU消耗也比较明显，这种模型实际应用也比较少。
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-2.png?raw=true" width="444"></div>
-<div align=center>同步非阻塞I/O过程</div>
+<div align=center>同步非阻塞I/O</div>
 <br>
 
 **3.多路复用I/O模型**
@@ -61,15 +75,15 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 多路复用建立在系统提供的事件分离函数select，poll，epoll之上，先更新select的socket监控列表，然后等待函数返回（此过程是阻塞的），关于这几个系统函数实现方式的特性的不同，也是适用不同的场景下。但是多路复用I/O在上层的实际应用很多，像Java的NI/O，Redis以及Netty通信框架都采用了这种模型，不过像Netty框架在多路复用的基础上又做了一下zerocopy等一些更细致的有针对性的优化方案。<br>
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-3.png?raw=true" width="444"></div>
-<div align=center>多路复用I/O过程</div>
+<div align=center>多路复用I/O</div>
 <br>
 
 **4.信号驱动I/O**
 <br><br>
-应用进程使用 sigactI/On 系统调用，内核立即返回，应用进程可以继续执行，也就是第一阶段是不阻塞的，等待系统向应用进程发送 SIGI/O信号，再来同步的向进程拷贝数据。CPU 利用率更高，但是过于依赖OS能力，在大量I/O操作的情况下可能造成信号队列溢出导致信号丢失，造成灾难性后果，所以实际应用也很少。
+应用进程使用 sigactI/On 系统调用，内核立即返回，应用进程可以继续执行，也就是第一阶段是不阻塞的，等待系统向应用进程发送 SIGI/O信号，再来同步的向进程拷贝数据。CPU 利用率更高，但是过于依赖OS能力，在大量I/O操作的情况下可能造成信号队列溢出导致信号丢失，造成严重后果，所以实际应用也很少。
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-4.png?raw=true" width="444"></div>
-<div align=center>信号驱动I/O过程</div>
+<div align=center>信号驱动I/O</div>
 <br>
 
 **5.异步I/O**
@@ -77,7 +91,7 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 两个阶段都是不阻塞，第二阶段系统直接向进程通知I/O已经完成，此时进程可以直接使用数据。异步模型效率较高，但是还未足够成熟，同时也过于依赖操作系统，实际应用的也并不多。
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-5.png?raw=true" width="444"></div>
-<div align=center>异步I/O过程</div>
+<div align=center>异步I/O</div>
 <br>
 
 **为了低耦合，更可控，异步I/O和信号驱动I/O模型应用并不多见，更常见的是向对更灵活的多路复用和传统I/O模型。**
@@ -85,7 +99,7 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 
 **总体比较**
 <br><br>
-可以比较直观的发现在两个阶段中，各个模型分别的处理方式
+可以比较直观的发现在两个阶段中，各个模型分别的处理方式和阻塞情况
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-9.png?raw=true" width="555"></div>
 <div align=center>比较</div>
@@ -139,19 +153,24 @@ epoll比select和poll更加灵活而且没有描述符数量限制。
 
 * * *
 
-### 3.关于“sendfile”、"mmap"、"DMA"的特性应用
+### 3.关于“sendfile”、"mmap"的特性及应用场景
 
 如果我们始终让CPU来参与进行各种数据传输工作，会比较浪费。我们的数据传输工作用不到多少CPU核新的“计算”功能。另外CPU的运转速度和I/O操作的速度也并不匹配，会降低CPU的使用效率。
+<br><br>
+关于零拷贝（零复制）维基百科中有如下的描述：
+
+>零复制（英语：Zero-copy；也译零拷贝）技术是指计算机执行操作时，CPU不需要先将数据从某处内存复制到另一个特定区域。这种技术通常用于通过网络传输文件时节省CPU周期和内存带宽。
 
 
 #### 3.1 关于DMA
+
 说一下DMA的背景，DMA其实是为了让CPU更专注于计算本身，而不再过多的用在数据传输上，因为CPU的运转速度比I/O操作要快很多，
 并且IO过程中需要多次中断和切换上下文的操作，过多的用在传输上是有浪费资源的情况发生并且这不是很合理的实现。有了DMA的数据传输机制，既可以大幅提升I/O的吞吐率，
-也可以一定程度的解放CPU，让CPU避免做具体的"数据搬运"工作，去做更多计算的工作。DMA直接同内存发生成块的数据交换，因此I/O效率比较高，但是由于DMA窃取了时钟周期，
-占据了访问内存的数据总线，可能会影响CPU处理效率（但是此时CPU的一级二级缓存会比较发挥作用），这和DMA控制器的性能也有很大关系，总的来说DMA在解放CPU在IO的工作这件事上已经是一种相对有效的处理方式。
+也可以一定程度的解放CPU，**让CPU避免做具体的"数据搬运"工作，而去做更多的做好计算的职责。**DMA直接同内存发生成块的数据交换，因此I/O效率比较高，但是由于DMA窃取了时钟周期，
+占据了访问内存的数据总线，可能会影响CPU处理效率（但是此时CPU的一级二级缓存会比较发挥作用，~~CPU直接参与IO~~），这和DMA控制器的性能也有很大关系，总的来说DMA在解放CPU在IO的工作这件事上已经是一种相对有效的处理方式。
 
 
-    "零拷贝"实际上不是真正的不做copy，数据传输是不可避免要经过copy的，"零拷贝"是为了在传统的IO模式下尽量减少多余的拷贝次数，
+    所以"零拷贝"实际上不是不做copy，数据传输是不可避免要经过copy的，"零拷贝"是为了在传统的IO模式下尽量减少多余的拷贝次数，
     或者尽量减少拷贝过程中CPU的参与，DMA在一些"零拷贝"的实现过程中可以视为是一个重要的工具。
 
 
@@ -167,15 +186,31 @@ sendfile的实际应用很多，数据直接在内核完成输入和输出，不
 **sendfile可以直接将Page Cache中某个fd的一部分数据传递给另外一个fd，而不用经过到用户空间的两次copy。其中sendfile(in,out)中的"in"只可以是从磁盘文件，而"out"可以是磁盘句柄也可以是socket句柄。**
 kafka就是基于此特性实现了从broker向consumer传输数据过程的"零拷贝"（其实是减少了关于用户缓冲区的copy并且）。
 sendfile有一个天然的特性或者限制，就是应用层无法再对数据进行加工，而只能直接传输，而这种弊端在适合的场景下也有可能成为应用层的优势。
+
+- 传统I/O ：硬盘—>内核缓冲区—>用户缓冲区—>内核socket缓冲区—>协议引
+- sendfile（ DMA 收集拷贝）：硬盘—>内核缓冲区—>协议引擎
+
 下图是sendfile在读取本读数据发送到socket文件场景下的的一个应用实践。
 
 <br>
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-123.png?raw=true" width="666"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-123.png?raw=true" width="777"></div>
 <div align=center>sendfile()应用前后</div>
 <br>
 
 
+#### 优化手段的比较
 
+    应用层关于实现磁盘/网络IO的"零拷贝"优化总要依赖的底层技术实现通常包括但是不限于 直接内存映射、直接内存读写、DMA拷贝、sendfile()等手段，他们分别有着不同的适用场景供上层应用来封装，
+    同时也或多或少着存在一些弊端在实际应用中需要注意取舍。
+
+<br>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-11.png?raw=true" width="777"></div>
+<div align=center>IO过程优化</div>
+<br>
+
+* * *
+
+### 4.关于应用层对上述技术的实际应用
 
 
 
