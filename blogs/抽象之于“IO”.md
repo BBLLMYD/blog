@@ -11,6 +11,13 @@
 而不对OS和App之间的交互基础有足够多的了解，是很容易迷茫的。先了解关于OS与用户程序之间的通信的种种模式，
 才能根据我们的业务场景选型或实现更适合的通信组件。
 
+- [关于“IO”模型分类](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CIO%E2%80%9D.md#1%E5%85%B3%E4%BA%8Eio%E6%A8%A1%E5%9E%8B%E5%88%86%E7%B1%BB)
+- [关于“多路复用”几种实现](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CIO%E2%80%9D.md#2%E5%85%B3%E4%BA%8E%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%87%A0%E7%A7%8D%E5%AE%9E%E7%8E%B0)
+- [关于“sendfile”、"mmap"的特性及应用场景](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CIO%E2%80%9D.md#3%E5%85%B3%E4%BA%8Esendfilemmap%E7%9A%84%E7%89%B9%E6%80%A7%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF)
+- [关于应用层对上述技术的实际应用](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CIO%E2%80%9D.md#4%E5%85%B3%E4%BA%8E%E5%BA%94%E7%94%A8%E5%B1%82%E5%AF%B9%E4%B8%8A%E8%BF%B0%E6%8A%80%E6%9C%AF%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8)
+
+<br>
+
 ### 1.关于“IO”模型分类
 
 <br>
@@ -187,8 +194,8 @@ sendfile有一个天然的特性或者限制，就是应用层无法再对数据
 
 #### -优化手段的比较
 
-*应用层关于实现磁盘/网络IO的"零拷贝"优化总要依赖的底层技术实现通常包括但是不限于 直接内存映射、直接内存读写、DMA拷贝、sendfile()等手段，他们分别有着不同的适用场景供上层应用来封装，
-同时也或多或少着存在一些弊端在实际应用中需要注意取舍。*
+    应用层关于实现磁盘/网络IO的"零拷贝"优化总要依赖的底层技术实现通常包括但是不限于 直接内存映射、直接内存读写、DMA拷贝、sendfile()等手段，他们分别有着不同的适用场景供上层应用来封装，
+    同时也或多或少着存在一些弊端在实际应用中需要注意取舍。
 
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-11.png?raw=true" width="777"></div>
