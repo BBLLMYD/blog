@@ -35,9 +35,7 @@
 - [垃圾收集](https://github.com/BBLLMYD/blog/blob/master/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CJVM%E2%80%9D.md#5%E5%85%B3%E4%BA%8E%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86)
 - [处理工具](https://github.com/BBLLMYD/blog/blob/master/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CJVM%E2%80%9D.md#5%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7)
 
-<br>
 
-    
 * * *
 
 ### 1.关于“类加载”
