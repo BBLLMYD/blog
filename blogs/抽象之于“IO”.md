@@ -37,7 +37,7 @@ I/O的流程可分为两步：
 **我们常讲的同步/异步指的其实是第二个动作，阻塞/非阻塞指的是第一个动作。**<br>
 各个I/O模型也是在两个步骤的实现方式不同而区分的，大致是下图的思路。
 <br>
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-7-7.png?raw=true" width="937"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-7-7-0.png?raw=true" width="937"></div>
 
 <br>
 其中的信号驱动I/O和异步I/O实际上应用的比较少，它们的实现方式相对和操作系统更耦合而不可控是很大一部分原因。
@@ -146,7 +146,7 @@ epoll比select和poll更加灵活而且没有描述符数量限制。
 
 **上面三个实现虽然看起来像一个进化的过程，但并不是后面出现的一定比前面的好，事实他们的特性不同有各自的适用场景。**
 <br>
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-8.png?raw=true" width="937"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-8-0.png?raw=true" width="937"></div>
 <div align=center>适用场景</div>
 <br>
 
@@ -204,7 +204,7 @@ sendfile有一个天然的特性或者限制，就是应用层无法再对数据
     他们分别有着不同的适用场景供上层应用来封装，同时也或多或少着存在一些弊端在实际应用中需要注意。
 
 <br>
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-11.png?raw=true" width="777"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-11-0.png?raw=true" width="777"></div>
 <div align=center>IO过程优化</div>
 <br>
 
