@@ -55,7 +55,9 @@ I/O的流程可分为两步：
 
 **1.同步阻塞I/O**
 <br><br>
-Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻塞的方式来进行，对进程的线程资源很不友好，当大量连接时容易将线程资源耗尽无法处理新的连接。但是系统调用次数较少，在流量不大且平稳的时候比较适用。
+Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻塞的方式来进行，
+对进程的线程资源很不友好，
+当大量连接时容易将线程资源耗尽无法处理新的连接。但是系统调用次数较少，在流量不大且平稳的时候比较适用。
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-1.png?raw=true" width="444"></div>
 <div align=center>同步阻塞I/O过程</div>
@@ -64,7 +66,8 @@ Linux中默认的socket就是阻塞式I/O，也就是上述两个阶段都是阻
 
 **2.同步非阻塞I/O**
 <br><br>
-和上一个同步阻塞I/O相比，同步非阻塞I/O在第一阶段的阻塞等待变成轮询的方式，相对之下避免了一下线程消耗，但是系统调用次数过多，CPU消耗也比较明显，这种模型实际应用也比较少。
+和上一个同步阻塞I/O相比，同步非阻塞I/O在第一阶段的阻塞等待变成轮询的方式，
+相对之下避免了一下线程消耗，但是系统调用次数过多，CPU消耗也比较明显，这种模型实际应用也比较少。
 <br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/03/3-2.png?raw=true" width="444"></div>
 <div align=center>同步非阻塞I/O</div>
