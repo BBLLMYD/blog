@@ -28,7 +28,7 @@ TCP发送报文时，是将应用层数据写入TCP缓冲区中，然后由TCP�
 因为这数据粘连的影响是在应用层才能体现的。也就需要在应用层面上来解决粘包拆包带来的问题。
 
                                             
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0901.png?raw=true" width="887"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0901.png?raw=true" width="798"></div>
 
  
 <br>
