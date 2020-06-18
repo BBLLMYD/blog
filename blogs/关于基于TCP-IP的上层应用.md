@@ -32,6 +32,8 @@ TCP发送报文时，是将应用层数据写入TCP缓冲区中，然后由TCP�
 - 从传输的角度：一个发送占用多个传输包（拆），多个发送共用一个传输包（粘）。
                                             
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0901.png?raw=true" width="798"></div>
+<div align=center>粘/拆包及处理</div>
+
 
 对于粘包拆包的原因如果理解了的话，其实不难想出在应用层应对这种现象的方法，往往也是一些通用的思想。
 包括：发送方面和接受方约定固定的长度；约定指定分隔符；固定的位置用来存取存储报文长度等，他们优劣势在上图中也有说明。
@@ -43,10 +45,11 @@ TCP发送报文时，是将应用层数据写入TCP缓冲区中，然后由TCP�
 那么这部分头部信息包含的内容是如何被协议利用的呢。
 
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0902.png?raw=true" width="798"></div>
+<div align=center>TCP数据包</div>
 
 上图中数据上面的部分都是TCP的头部信息。
 
-- 从上往下看，源端口号目标端口号，由于传输层是不关注ip信息的，ip信息在下面的ip层添加，
+- 从上往下看，先是源端口号目标端口号，由于传输层是不关注ip信息的，ip信息在下面的ip层添加，
 **在添加了一层ip信息之后源ip+源端口+目的ip+目的端口就可以视为一个"TCP元组"，可以确定唯一的一条TCP连接了**。
 
 - 序列号和确认序号就是发送过程中的seq和ack的值，**需要和FLAG配合才能表示出准确的意义**，
