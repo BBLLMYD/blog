@@ -31,14 +31,14 @@ TCP发送报文时，是将应用层数据写入TCP缓冲区中，然后由TCP�
 - 从收发的角度：一个发送被多次接受（拆），多次发送被一次接受（粘）。
 - 从传输的角度：一个发送占用多个传输包（拆），多个发送共用一个传输包（粘）。
                                             
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0901.png?raw=true" width="798"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0901.png?raw=true" width="867"></div>
 <div align=center>粘/拆包及处理</div>
 
 
 对于粘包拆包的原因如果理解了的话，其实不难想出在应用层应对这种现象的方法，往往也是一些通用的思想。
 包括：发送方面和接受方约定固定的长度；约定指定分隔符；固定的位置用来存取存储报文长度等，他们优劣势在上图中也有说明。
  
-### 从TCP头部包含的信息来看TCP协议一些机制实现
+### 从TCP头部包含的信息来看TCP协议一些机制
 
 我们知道应用数据到发送到传输层的时候，会被增加一部分TCP头信息，为什么是这些数据，
 上面提到了TCP需要在恶劣不可靠的环境下保证数据的可靠传输，
