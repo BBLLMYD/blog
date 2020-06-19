@@ -78,8 +78,12 @@ TCP发送报文时，是将应用层数据写入TCP缓冲区中，然后由TCP�
 无论是TCP还是UDP都是基于socket系统调用实现的。
 Socket属于操作系统的概念，而非网络协议分层的概念。
 操作系统选择对于网络协议的实现在二到四层的处理代码在内核里面、七层的处理代码让应用自己去做，**两者需要跨内核态和用户态通信**，
-此时需要一个系统调用完成这个衔接，这就是Socket。在Linux下一切都抽象成了文件，所以网络调用也是先从网络文件描述符开始，
+此时需要一个系统调用完成这个衔接，这就是Socket。
+在Linux下一切都抽象成了文件，所以网络调用也是先从网络文件描述符开始，
 对于给上层用户提供的函数接口常常使用的有如下这些。
+
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0903.png?raw=true" width="777"></div>
+<div align=center>函数接口</div>
 
 - socket() ：得到文件描述符
 - bind() ：给描述符绑定IP和端口
@@ -89,15 +93,10 @@ Socket属于操作系统的概念，而非网络协议分层的概念。
 - write() ：写数据
 - read() ：读数据
 
-上面提到的函数功能只是个很粗略的一个方向，
-实际上每个函数源码中的参数状态类型和数据结构以及函数计算内容要逻辑复杂的多。
-
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0903.png?raw=true" width="798"></div>
-<div align=center>函数接口</div>
-
+上面提到的函数功能只是个很粗略的一个方向，实际上每个函数源码中的参数状态类型和数据结构以及函数计算内容要逻辑复杂的多。
 想要建立TCP连接在流程上就离不开上面提到的函数调用，大致的时序流程如下图。
 
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0904.png?raw=true" width="666"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0904.png?raw=true" width="555"></div>
 
 
 ### 基于TCP的应用要注意的几点以及一些可能的优化
