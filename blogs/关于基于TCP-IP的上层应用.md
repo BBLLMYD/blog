@@ -50,7 +50,7 @@ TCP发送报文时，是将应用层数据写入TCP缓冲区中，然后由TCP�
 那么这部分头部信息包含的内容是如何被协议利用的呢。
 
 <br>                                     
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0902.png?raw=true" width="798"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0902.png?raw=true" width="765"></div>
 <div align=center>TCP数据包</div>
 <br>
 
