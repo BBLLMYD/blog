@@ -38,7 +38,9 @@ TCP发送报文时，是将应用层数据写入TCP缓冲区中，然后由TCP�
 
 对于粘包拆包的原因如果理解了的话，其实不难想出在应用层应对这种现象的方法，往往也是一些通用的思想。
 包括：发送方面和接受方约定固定的长度；约定指定分隔符；固定的位置用来存取存储报文长度等，他们优劣势在上图中也有说明。
- 
+
+- - -
+
 ### 从TCP头部包含信息来看TCP协议一些机制
 
 我们知道应用数据到发送到传输层的时候，会被增加一部分TCP头信息，为什么是这些数据，
@@ -47,6 +49,7 @@ TCP发送报文时，是将应用层数据写入TCP缓冲区中，然后由TCP�
 
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0902.png?raw=true" width="798"></div>
 <div align=center>TCP数据包</div>
+<br>
 
 上图中数据上面的部分都是TCP的头部信息。
 
@@ -68,10 +71,16 @@ TCP发送报文时，是将应用层数据写入TCP缓冲区中，然后由TCP�
 
 <br>
 
+- - -
+
+
 ### TCP建立&断开连接（握手&挥手）以及状态位
 
 首先明确建立连接是TCP层的动作，是在内核完成的，应用层是不需要参与这个过程的。
 应用端更多是关注和判断系统和进程当前的连接状态等信息，以及用户进程的和内核交互通信的函数调用情况。
+
+- - -
+
 
 ### Linux对TCP协议是如何抽象及实现的
 
@@ -84,6 +93,7 @@ Socket属于操作系统的概念，而非网络协议分层的概念。
 
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0903.png?raw=true" width="777"></div>
 <div align=center>函数接口</div>
+<br>
 
 - socket() ：得到文件描述符
 - bind() ：给描述符绑定IP和端口
@@ -96,8 +106,9 @@ Socket属于操作系统的概念，而非网络协议分层的概念。
 上面提到的函数功能只是个很粗略的一个方向，实际上每个函数源码中的参数状态类型和数据结构以及函数计算内容要逻辑复杂的多。
 想要建立TCP连接在流程上就离不开上面提到的函数调用，大致的时序流程如下图。
 
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0904.png?raw=true" width="555"></div>
-
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0904.png?raw=true" width="449"></div>
+<br>
+- - -
 
 ### 基于TCP的应用要注意的几点以及一些可能的优化
 
