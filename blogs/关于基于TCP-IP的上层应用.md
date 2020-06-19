@@ -31,9 +31,11 @@ TCP发送报文时，是将应用层数据写入TCP缓冲区中，然后由TCP�
 
 - 从收发的角度：一个发送被多次接受（拆），多次发送被一次接受（粘）。
 - 从传输的角度：一个发送占用多个传输包（拆），多个发送共用一个传输包（粘）。
-                                            
+       
+<br>                                     
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0901.png?raw=true" width="867"></div>
 <div align=center>粘/拆包及处理</div>
+<br>
 
 
 对于粘包拆包的原因如果理解了的话，其实不难想出在应用层应对这种现象的方法，往往也是一些通用的思想。
@@ -47,6 +49,7 @@ TCP发送报文时，是将应用层数据写入TCP缓冲区中，然后由TCP�
 上面提到了TCP需要在恶劣不可靠的环境下保证数据的可靠传输，
 那么这部分头部信息包含的内容是如何被协议利用的呢。
 
+<br>                                     
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0902.png?raw=true" width="798"></div>
 <div align=center>TCP数据包</div>
 <br>
@@ -57,7 +60,9 @@ TCP发送报文时，是将应用层数据写入TCP缓冲区中，然后由TCP�
 后面再添加了一层ip信息之后**源ip+源端口+目的ip+目的端口就可以视为一个"TCP元组"**，可以确定唯一的一条TCP连接了。
 
 - 序列号和确认序号就是发送过程中的seq和ack的值，**需要和FLAG的有效标志位配合才能够表示出准确的含义**，
-在确认成功发送的同时序号的值也保证着包的顺序逻辑，避免乱序。
+在确认成功发送的同时序号的值也保证着包的顺序逻辑，避免包的乱序（保证ACK的是指定的seq）。
+
+
 
 - 头部长度的字段是用来数据部分开始的位置的，因为头部可能也存在一些扩展字段信息，所以按照固定长度来计算会很大程度上降低灵活性。
 
@@ -77,7 +82,13 @@ TCP发送报文时，是将应用层数据写入TCP缓冲区中，然后由TCP�
 ### TCP建立&断开连接（握手&挥手）以及状态位
 
 首先明确建立连接是TCP层的动作，是在内核完成的，应用层是不需要参与这个过程的。
-应用端更多是关注和判断系统和进程当前的连接状态等信息，以及用户进程的和内核交互通信的函数调用情况。
+应用端更多是关注和判断系统和进程当前的连接状态等信息，明确当前资源的占用及用户进程的和内核交互通信的函数调用状况。
+TCP是全双工的协议，任何一方都可以发起连接和断开的请求，通常我们称发起请求的一方为Client端，
+但是断开连接的请求既可能是Client先发起也可能是Server端先发起的。
+<br>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0905.png?raw=true" width="798"></div>
+<div align=center>建立/断开连接</div>
+<br>
 
 - - -
 
@@ -91,6 +102,7 @@ Socket属于操作系统的概念，而非网络协议分层的概念。
 在Linux下一切都抽象成了文件，所以网络调用也是先从网络文件描述符开始，
 对于给上层用户提供的函数接口常常使用的有如下这些。
 
+<br>
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0903.png?raw=true" width="777"></div>
 <div align=center>函数接口</div>
 <br>
