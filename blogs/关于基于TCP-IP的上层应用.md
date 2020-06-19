@@ -86,7 +86,7 @@ TCP发送报文时，是将应用层数据写入TCP缓冲区中，然后由TCP�
 TCP是全双工的协议，任何一方都可以发起连接和断开的请求，通常我们称发起请求的一方为Client端，
 但是断开连接的请求既可能是Client先发起也可能是Server端先发起的。
 <br>
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0905.png?raw=true" width="798"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0905.png?raw=true" width="765"></div>
 <div align=center>建立/断开连接</div>
 <br>
 
@@ -103,7 +103,7 @@ Socket属于操作系统的概念，而非网络协议分层的概念。
 对于给上层用户提供的函数接口常常使用的有如下这些。
 
 <br>
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0903.png?raw=true" width="777"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0903.png?raw=true" width="765"></div>
 <div align=center>函数接口</div>
 <br>
 
@@ -119,6 +119,7 @@ Socket属于操作系统的概念，而非网络协议分层的概念。
 想要建立TCP连接在流程上就离不开上面提到的函数调用，大致的时序流程如下图。
 
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/09/0904.png?raw=true" width="449"></div>
+<div align=center>Linux下TCP协议的函数调用</div>
 <br>
 - - -
 
