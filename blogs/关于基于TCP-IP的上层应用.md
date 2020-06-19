@@ -102,11 +102,11 @@ ACK表示对状态的应答，需携带者有序值的ack来有效响应。
 
 Linux下当前系统里这些TCP状态分别的个数情况可以由下面的一个netstat命令查看。
 ````
-netstat -n|grep  ^tcp | awk ‘{++S[$NF]} END {for(a in S) print a, S[a]}’
+netstat -n | grep  ^tcp | awk ‘{++S[$NF]} END {for(a in S) print a, S[a]}’
 ````
 想要查看当前系统各进程对句柄资源的使用情况，可以用下面的losf命令。
 ````
-lsof|awk '{print $2}'|sort|uniq -c|sort -nr|more
+lsof -n | awk '{print $2}'| sort|uniq -c|sort -nr | more
 ````
 具体一点的优化建议放在下面来说，做优化的好的前提是能够真的理解为什么需要优化以及为啥可以优化，
 这些都还是需要足够扎实基础知识做支撑的，
