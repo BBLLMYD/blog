@@ -8,12 +8,13 @@ TCP/IP协议的用途不用多说，是绝大多数应用采用的基础协议�
 
 > TCP/IP传输协议，即传输控制/网络协议，也叫作网络通讯协议。它是在网络的使用中的最基本的通信协议。TCP/IP传输协议对互联网中各部分进行通信的标准和方法进行了规定。并且，TCP/IP传输协议是保证网络数据信息及时、完整传输的两个重要的协议。TCP/IP传输协议是严格来说是一个四层的体系结构，应用层、传输层、网络层和数据链路层都包含其中。
 
-- [1.从TCP头部包含信息来看TCP协议一些机制]()
-- [2.Linux对TCP协议是如何抽象及实现的]()
-- [3.TCP建立&断开连接（握手&挥手）以及状态位]()
-- [4.长链接下出现粘包/拆包的原因和应对方案]()
-- [5.基于TCP的应用要注意的几点以及一些可能的优化]()
-- [6.总结]()
+这篇讨论从下面的几个方面来展开，从协议的机制到OS对协议的实现和特性，以及在基于TCP的应用层关于TCP连接状态等的一些状况。
+
+- [1.从TCP头部包含信息来看TCP协议一些机制](https://github.com/BBLLMYD/blog/blob/master/blogs/%E5%85%B3%E4%BA%8E%E5%9F%BA%E4%BA%8ETCP-IP%E7%9A%84%E4%B8%8A%E5%B1%82%E5%BA%94%E7%94%A8.md#1%E4%BB%8Etcp%E5%A4%B4%E9%83%A8%E5%8C%85%E5%90%AB%E4%BF%A1%E6%81%AF%E6%9D%A5%E7%9C%8Btcp%E5%8D%8F%E8%AE%AE%E4%B8%80%E4%BA%9B%E6%9C%BA%E5%88%B6)
+- [2.Linux对TCP协议是如何抽象及实现的](https://github.com/BBLLMYD/blog/blob/master/blogs/%E5%85%B3%E4%BA%8E%E5%9F%BA%E4%BA%8ETCP-IP%E7%9A%84%E4%B8%8A%E5%B1%82%E5%BA%94%E7%94%A8.md#2linux%E5%AF%B9tcp%E5%8D%8F%E8%AE%AE%E6%98%AF%E5%A6%82%E4%BD%95%E6%8A%BD%E8%B1%A1%E5%8F%8A%E5%AE%9E%E7%8E%B0%E7%9A%84)
+- [3.TCP建立&断开连接（握手&挥手）以及状态位](https://github.com/BBLLMYD/blog/blob/master/blogs/%E5%85%B3%E4%BA%8E%E5%9F%BA%E4%BA%8ETCP-IP%E7%9A%84%E4%B8%8A%E5%B1%82%E5%BA%94%E7%94%A8.md#3tcp%E5%BB%BA%E7%AB%8B%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5%E6%8F%A1%E6%89%8B%E6%8C%A5%E6%89%8B%E4%BB%A5%E5%8F%8A%E7%8A%B6%E6%80%81%E4%BD%8D)
+- [4.长链接下出现粘包/拆包的原因和应对方案](https://github.com/BBLLMYD/blog/blob/master/blogs/%E5%85%B3%E4%BA%8E%E5%9F%BA%E4%BA%8ETCP-IP%E7%9A%84%E4%B8%8A%E5%B1%82%E5%BA%94%E7%94%A8.md#4%E9%95%BF%E9%93%BE%E6%8E%A5%E4%B8%8B%E5%87%BA%E7%8E%B0%E7%B2%98%E5%8C%85%E6%8B%86%E5%8C%85%E7%9A%84%E5%8E%9F%E5%9B%A0%E5%92%8C%E5%BA%94%E5%AF%B9%E6%96%B9%E6%A1%88)
+- [5.基于TCP的应用要注意的几点以及一些可能的优化](https://github.com/BBLLMYD/blog/blob/master/blogs/%E5%85%B3%E4%BA%8E%E5%9F%BA%E4%BA%8ETCP-IP%E7%9A%84%E4%B8%8A%E5%B1%82%E5%BA%94%E7%94%A8.md#5%E5%9F%BA%E4%BA%8Etcp%E7%9A%84%E5%BA%94%E7%94%A8%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%87%A0%E7%82%B9%E4%BB%A5%E5%8F%8A%E4%B8%80%E4%BA%9B%E5%8F%AF%E8%83%BD%E7%9A%84%E4%BC%98%E5%8C%96)
 
 - - -
 
@@ -172,4 +173,3 @@ ps:Linux下有很多调整tcp协议相关的参数如tcp_timestamps,tcp_tw_reuse
 
 - - -
 
-### 6.总结
