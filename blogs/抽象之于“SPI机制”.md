@@ -15,9 +15,98 @@ SPI机制在wikipedia的一段描述：
 SPI机制其实和SpringBoot的约定大约配置的思想类似，都是简化或者缺省了显示配置的步骤。
 下面分别从SPI机制的思想和一些应用示例来展开讨论和拓展一下。
 
-- [SPI机制的应用]()
-- [SPI思想的拓展]()
-- [总结]()
+- [1.SPI机制的应用]()
+- [2.SPI思想的拓展]()
+- [3.总结]()
+
+
+* * *
+
+### 1.SPI机制的应用
+
+调用方依赖的是接口定义，实现方可以做不同的扩展。这样客户端就可以无需配置实现可拔插的选择。
+对SPI机制应用的开源组件有很多，我们自己也可以做相关的实现方式。
+
+- 使用JDK的SPI机制示例
+
+定义接口：
+```
+    public interface HelloWorld {
+        void helloWorld();
+    }
+```
+提供不同的接口实现类：
+```
+    public class HelloWorldImpl1 implements HelloWorld {
+        @Override
+        public void helloWorld() {
+            System.out.println(this.getClass().getName());
+        }
+    }
+    
+    public class HelloWorldImpl2 implements HelloWorld {
+        @Override
+        public void helloWorld() {
+            System.out.println(this.getClass().getName());
+        }
+    }
+```
+客户端代码：
+```
+    public static void main(String[] args) {
+        ServiceLoader<HelloWorld> load = ServiceLoader.load(HelloWorld.class);
+        Iterator<HelloWorld> iterator = load.iterator();
+        while (iterator.hasNext()){
+            HelloWorld helloWorld = iterator.next();
+            helloWorld.helloWorld();
+        }
+    }
+```
+在resources目录下添加文件名为com.skr.spi.HelloWorld的文件，文件内容为两行分别是com.skr.spi.HelloWorldImpl1和com.skr.spi.HelloWorldImpl2
+
+执行输出结果：
+
+com.skr.spi.HelloWorldImpl1
+com.skr.spi.HelloWorldImpl2
+
+以上就是使用JDK的SPI机制实现的接口服务发现机制示例，客户端代码中的ServiceLoader存在下面一行代码：
+private static final String PREFIX = "META-INF/services/";
+也就是说"META-INF/services/"目录就是ServiceLoader和客户端约定的一个目标目录。
+
+ServiceLoader本身其实就是一个java.lang.Iterable接口的实现，会来迭代配置中的实现类和以及校验和初始化实例等工作。
+基于这个思路其实就比较容易扩展类似的功能了。
+
+- 开源组件的SPI机制应用
+
+比如JDBC的扩展方式，在java.sql.DriverManager中初始化Driver实现的loadInitialDrivers()方法中，指定了java.sql.Driver接口。
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/11/1102.png?raw=true" width="666"></div>
+
+在mysql的驱动实现中根据加载规范来进行配置。
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/11/1103.png?raw=true" width="444"></div>
+
+Dubbo没有使用Java原生的SPI机制，是对其进行了多维度的增强，除了支持原来的加载接口实现类，还增加了Dubbo的IOC和AOP等特性。
+Dubbo采用SPI机制实现了在注册中心、监控中心、网络传输、负载均衡等等几乎RPC所有相关组件基于抽象层的扩展方式。
+
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/11/1104.png?raw=true" width="666"></div>
+
+具体的Dubbo SPI介绍可以直接看[Dubbo官方文档](http://dubbo.apache.org/zh-cn/docs/source_code_guide/dubbo-spi.html)的开发者指南及源码导读部分。
+文档中不仅有对Dubbo设计的说明，同时包含很多设计上的理念，这些内容对我们学习框架本身以及框架之外的设计思想都是很有启发的。
+
+
+* * *
+
+### 2.SPI思想的拓展
+
+
+
+
+
+* * *
+
+### 3.总结
+
+SPI机制的实现从深度上并不属于比较复杂的技术，但是它的思想是具有启发性和通用性的，我认为这也是它更大的价值。
+
 
 
 
