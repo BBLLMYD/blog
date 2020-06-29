@@ -66,7 +66,7 @@ SPI机制其实和SpringBoot的约定大约配置的思想类似，都是简化�
 
 执行输出结果：
 
-com.skr.spi.HelloWorldImpl1
+com.skr.spi.HelloWorldImpl1<br>
 com.skr.spi.HelloWorldImpl2
 
 以上就是使用JDK的SPI机制实现的接口服务发现机制示例，客户端代码中的ServiceLoader存在下面一行代码：
@@ -78,11 +78,17 @@ ServiceLoader本身其实就是一个java.lang.Iterable接口的实现，会来�
 
 - 开源组件的SPI机制应用
 
+a\. JDBC
+
 比如JDBC的扩展方式，在java.sql.DriverManager中初始化Driver实现的loadInitialDrivers()方法中，指定了java.sql.Driver接口。
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/11/1102.png?raw=true" width="666"></div>
 
-在mysql的驱动实现中根据加载规范来进行配置。
+在mysql的驱动实现中根据加载规范来进行配置，如下图。
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/11/1103.png?raw=true" width="444"></div>
+
+和JDBC类似定义规范的实现模式还有如apache的common-logging等。
+
+b\. Dubbo
 
 Dubbo没有使用Java原生的SPI机制，是对其进行了多维度的增强，除了支持原来的加载接口实现类，还增加了Dubbo的IOC和AOP等特性。
 Dubbo采用SPI机制实现了在注册中心、监控中心、网络传输、负载均衡等等几乎RPC所有相关组件基于抽象层的扩展方式。
@@ -92,10 +98,12 @@ Dubbo采用SPI机制实现了在注册中心、监控中心、网络传输、负
 具体的Dubbo SPI介绍可以直接看[Dubbo官方文档](http://dubbo.apache.org/zh-cn/docs/source_code_guide/dubbo-spi.html)的开发者指南及源码导读部分。
 文档中不仅有对Dubbo设计的说明，同时包含很多设计上的理念，这些内容对我们学习框架本身以及框架之外的设计思想都是很有启发的。
 
-
 * * *
 
 ### 2.SPI思想的拓展
+
+SPI本质上就是把抽象层和实现层分离，并且约定注册方式的一种方案。
+实际上这种思想在Java的开源项目里是很常见到的，因为这种思想天然符合Java的语言特性。
 
 
 
