@@ -24,18 +24,20 @@ SPI机制其实和SpringBoot的约定大约配置的思想类似，都是简化�
 
 ### 1.SPI机制的应用
 
-调用方依赖的是接口定义，实现方可以做不同的扩展。这样客户端就可以无需配置实现可拔插的选择。
-对SPI机制应用的开源组件有很多，我们自己也可以做相关的实现方式。
+SPI机制在很多框架中都有相应实现，我们可以根据JDK的实现机制来做一个示例，然后看其他开源组件分别是如何实现/体现的。
 
 #### 1.1使用JDK的SPI机制示例
 
-定义接口：
+调用方依赖的是接口定义，实现方可以做不同的扩展。这样客户端就可以无需配置实现可拔插的选择。
+对SPI机制应用的开源组件有很多，我们自己也可以做相关的实现方式。
+
+- (1) 定义接口：
 ```
     public interface HelloWorld {
         void helloWorld();
     }
 ```
-提供不同的接口实现类：
+- (2) 提供不同的接口实现类：
 ```
     public class HelloWorldImpl1 implements HelloWorld {
         @Override
@@ -51,7 +53,7 @@ SPI机制其实和SpringBoot的约定大约配置的思想类似，都是简化�
         }
     }
 ```
-客户端代码：
+- (3) 客户端代码：
 ```
     public static void main(String[] args) {
         ServiceLoader<HelloWorld> load = ServiceLoader.load(HelloWorld.class);
@@ -64,10 +66,12 @@ SPI机制其实和SpringBoot的约定大约配置的思想类似，都是简化�
 ```
 在resources目录下添加文件名为com.skr.spi.HelloWorld的文件，文件内容为两行分别是com.skr.spi.HelloWorldImpl1和com.skr.spi.HelloWorldImpl2
 
-执行输出结果：
+- (4) 执行输出结果：
 
 com.skr.spi.HelloWorldImpl1<br>
 com.skr.spi.HelloWorldImpl2
+
+<br>
 
 以上就是使用JDK的SPI机制实现的接口服务发现机制示例，客户端代码中的ServiceLoader存在下面一行代码：
 private static final String PREFIX = "META-INF/services/";
@@ -77,7 +81,6 @@ ServiceLoader本身其实就是一个java.lang.Iterable接口的实现，会来�
 基于这个思路其实就比较容易扩展类似的功能了。
 
 #### 1.2开源组件的SPI机制应用
-
 
 - JDBC
 
@@ -103,7 +106,8 @@ Dubbo采用SPI机制实现了在注册中心、监控中心、网络传输、负
 <br>
 
 
-具体的Dubbo SPI介绍可以直接看[Dubbo官方文档](http://dubbo.apache.org/zh-cn/docs/source_code_guide/dubbo-spi.html)的开发者指南及源码导读部分。
+具体的Dubbo SPI介绍可以直接看Dubbo官方文档
+的[开发者指南](http://dubbo.apache.org/zh-cn/docs/source_code_guide/dubbo-spi.html)及[源码导读](http://dubbo.apache.org/zh-cn/docs/source_code_guide/dubbo-spi.html)部分。
 文档中不仅有对框架本身设计的说明，同时包含很多设计上的理念，这些内容对我们学习框架本身以及框架之外的设计思想都是很有启发的。
 
 * * *
@@ -115,13 +119,15 @@ SPI本质上就是把抽象层和实现层分离，并且约定注册方式的�
 不仅是在RPC场景有比较天然的服务注册和发现，
 其实Spring、SpringBoot或者一些工具的集成插件都直接应用着SPI机制或间接用着SPI机制设计的模式。
 
-
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/11/1106.png?raw=true" width="555"></div>
+<div align=center>SPI机制相关</div>
+<br>
 
 * * *
 
 ### 3.总结
 
-SPI机制的技术原理好像并不复杂，但是简单思维也可以拓展出像Dubbo一样全面也精彩的设计应用。
+原生SPI机制的技术原理好像并不复杂，但是简单思维也可以拓展出像Dubbo一样全面也精彩的设计应用。
 它对于抽象和实现分离管理的机制和思想是具有启发性和通用性的，我认为这也是SPI机制更大的价值。
 
 
