@@ -83,11 +83,12 @@ a\. JDBC
 比如JDBC的扩展方式，在java.sql.DriverManager中初始化Driver实现的loadInitialDrivers()方法中，指定了java.sql.Driver接口。
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/11/1102.png?raw=true" width="666"></div>
 <div align=center>DriverManager指定的抽象层</div>
+<br>
 
 在mysql的驱动实现中根据加载规范来进行配置，如下图。
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/11/1103.png?raw=true" width="444"></div>
 <div align=center>mysql驱动的配置</div>
-
+<br>
 
 和JDBC类似定义规范的实现模式还有如apache的common-logging等。
 
@@ -98,6 +99,7 @@ Dubbo采用SPI机制实现了在注册中心、监控中心、网络传输、负
 
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/11/1105.png?raw=true" width="666"></div>
 <div align=center>Dubbo的SPI</div>
+<br>
 
 
 具体的Dubbo SPI介绍可以直接看[Dubbo官方文档](http://dubbo.apache.org/zh-cn/docs/source_code_guide/dubbo-spi.html)的开发者指南及源码导读部分。
