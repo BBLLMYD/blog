@@ -31,13 +31,13 @@ SPI机制在很多框架中都有相应实现，我们可以根据JDK的实现�
 调用方依赖的是接口定义，实现方可以做不同的扩展。这样客户端就可以无需配置实现可拔插的选择。
 对SPI机制应用的开源组件有很多，我们自己也可以做相关的实现方式。
 
-- (1) 定义接口：
+- （1） 定义接口：
 ```
     public interface HelloWorld {
         void helloWorld();
     }
 ```
-- (2) 提供不同的接口实现类：
+- （2） 提供不同的接口实现类：
 ```
     public class HelloWorldImpl1 implements HelloWorld {
         @Override
@@ -53,7 +53,7 @@ SPI机制在很多框架中都有相应实现，我们可以根据JDK的实现�
         }
     }
 ```
-- (3) 客户端代码：
+- （3） 客户端代码：
 ```
     public static void main(String[] args) {
         ServiceLoader<HelloWorld> load = ServiceLoader.load(HelloWorld.class);
@@ -66,7 +66,7 @@ SPI机制在很多框架中都有相应实现，我们可以根据JDK的实现�
 ```
 在resources目录下添加文件名为com.skr.spi.HelloWorld的文件，文件内容为两行分别是com.skr.spi.HelloWorldImpl1和com.skr.spi.HelloWorldImpl2
 
-- (4) 执行输出结果：
+- （4） 执行输出结果：
 
 com.skr.spi.HelloWorldImpl1<br>
 com.skr.spi.HelloWorldImpl2
