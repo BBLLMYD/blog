@@ -98,8 +98,11 @@ ServiceLoader本身其实就是一个java.lang.Iterable接口的实现，会来�
 
 - Dubbo
 
-Dubbo没有使用Java原生的SPI机制，是对其进行了多维度的增强，除了支持原来的加载接口实现类，还增加了Dubbo的IOC和AOP等特性。
+Dubbo没有使用Java原生的SPI机制，是对其进行了多维度的增强，
+除了支持原来的加载接口实现类，还增加了Dubbo的IOC和AOP等特性，
+并且对**JDK SPI实现中的不能按需加载、灵活度较弱、线程安全、异常机制等一些不够充分全面的实现部分都做了更升级的优化处理**。
 Dubbo采用SPI机制实现了在注册中心、监控中心、网络传输、负载均衡等等几乎RPC所有相关组件基于抽象层的扩展方式。
+
 
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/11/1105.png?raw=true" width="666"></div>
 <div align=center>Dubbo的SPI扩展</div>
