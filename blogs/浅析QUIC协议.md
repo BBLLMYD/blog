@@ -53,7 +53,7 @@ TCP是由操作系统在内核层面实现的，应用程序可以直接使用�
 1. 三次握手导致的TCP连接建立的延迟。
 2. TLS完全握手需要至少2个RTT，简化握手需要1个RTT的握手延迟
 
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/12/1201.png?raw=true" width="666"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/12/1201.png?raw=true" alt="HTTPS和QUIC的连接建立" width="666"></div>
 <span style="position: absolute; bottom: 0; left: 0;">连接建立...连接建立...连接建立...</span> 
 <div align=center>HTTPS和QUIC的连接建立</div>
 
