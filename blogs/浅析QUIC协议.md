@@ -105,7 +105,7 @@ QUIC协议本身的特性也更适合一些大量数据低延迟的场景，
 
 ### 4.总结
 
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/12/1202.png?raw=true" alt="HTTPS和QUIC的连接建立" width="666"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/12/1202.png?raw=true" alt="QUIC协议相关" width="666"></div>
 <div align=center>QUIC协议相关</div>
 <br>
 
