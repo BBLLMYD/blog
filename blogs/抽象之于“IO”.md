@@ -145,7 +145,9 @@ int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；
 int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);
 ````
 epoll_ctl()函数用于向内核注册新的描述符或者是改变某个文件描述符的状态。已注册的描述符在内核中会被维护在一棵红黑树上，通过回调函数内核会将I/O准备好的描述符加入到一个链表中管理，进程调用epoll_wait()函数便可以得到事件完成的描述符。
-epoll比select和poll更加灵活而且没有描述符数量限制。
+epoll比select和poll更加灵活而且没有描述符数量限制，
+epoll是使用红黑树，在内核中管理文件描述符的集合，不需要应用程序在每次操作时都传入和传出这个集合。
+epoll是使用事件驱动的机制，只关注有I/O事件发生的文件描述符，而select和poll都是基于轮训方法。
 
 **上面三个实现虽然看起来像一个进化的过程，但并不是后面出现的一定比前面的好，事实他们的特性不同有各自的适用场景。**
 <br>
