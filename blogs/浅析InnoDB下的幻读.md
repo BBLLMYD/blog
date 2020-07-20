@@ -23,19 +23,20 @@ MySQL多版本并发控制实现了MVCC机制，
 |     T1     |     T2    |
 |      :-        |     :-      |
 |      `start transaction;`        |     `start transaction;`      |
-|      `select * from users where id = 1;`        |           |
-|             |     `insert into users(id, name) values (1, 'skrT2');`      |
+|      1).`select * from users where id = 1;`        |           |
+|             |     1).`insert into users(id, name) values (1, 'skrT2');`      |
 |             |     `commit;`      |
-|      `insert into users(id, name) values (1, 'skrT1');`     |           |
+|      2).`insert into users(id, name) values (1, 'skrT1');`     |           |
 |      `commit;`     |           |
 
-这种情况下，"skrT1"值会插入失败。但是这在T1事务内好像是自洽的，因为T2的事务操作结果此时对T1是不可见的。
 
 
 
-1、T1：select * from users where id = 1;2、T2：insert into `users`(`id`, `name`) values (1, 'big cat');3、T1：insert into `users`(`id`, `name`) values (1, 'big cat');
+"skrT1"值会插入失败。但是这在T1事务内好像是自洽的，但是执行 因为T2的事务操作结果此时对T1是不可见的。
 
 
-我理解其实
+
+
+
 
 
