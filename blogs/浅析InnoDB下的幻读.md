@@ -42,7 +42,7 @@ MySQL多版本并发控制实现了MVCC机制。
 |      :-        |     :-      |
 |      `start transaction;`        |     `start transaction;`      |
 |      1. `select * from users where id = 1;`        |           |
-|             |     1. `insert into users(id, name) values (1, 'skrT2');`      |
+|             |     `insert into users(id, name) values (1, 'skrT2');`      |
 |             |     `commit;`      |
 |      2. `select * from users where id = 1 for update;`     |           |
 |      3. `insert into users(id, name) values (1, 'skrT1');`     |           |
