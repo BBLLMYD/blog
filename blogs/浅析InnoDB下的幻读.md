@@ -18,6 +18,7 @@ MySQL多版本并发控制实现了MVCC机制。
 **如果在快照读操作（select）后面跟着当前读操作（select for update），那就是无法避免幻读的，是因为第二次当前读之前这时候next-key锁还没来得及发挥作用。**
 也就是说这时候的"读"其实已经不仅仅是"读"了。
 
+---
 
 分别举个例子（**默认都在MySQL InnoDB的RR隔离级别下**）：
 
@@ -25,10 +26,9 @@ MySQL多版本并发控制实现了MVCC机制。
 
 |     T1     |     T2    |
 |      :-        |     :-      |
-|      `start transaction;`        |     `start transaction;`      |
+|      `start transaction;`        |          |
 |      1. `select * from users where id = 1;`        |           |
 |             |     1. `insert into users(id, name) values (1, 'skrT2');`      |
-|             |     `commit;`      |
 |      2. `insert into users(id, name) values (1, 'skrT1');`     |           |
 |      `commit;`     |           |
 
@@ -55,7 +55,7 @@ MySQL多版本并发控制实现了MVCC机制。
 
 这里举的例子是insert操作，实际update操作也是同样的道理，锁只是手段，本质上都是**当前读和快照读的不一致，或者快照读读到的旧版本数据导致**。
 
-insert时的异常情况是，我本来要插入本应该能够合理（依据刚刚读出的逻辑）插入的数据，却出现了不能正常插入的现象。
+insert时的异常情况是，我本来要插入本应该能够合理（依据刚刚读出的逻辑）插入的数据，却出现了不能正常插入的现象。<br>
 update时的异常现象是，我本来要更新本应该能够合理（依据刚刚读出的逻辑）更新的数据，却出现了没有正常更新的情况。
 
 
