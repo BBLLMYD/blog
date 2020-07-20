@@ -8,8 +8,8 @@
 这里我也说一下我对幻读现象的理解，或者说MySQL的InnoDB引擎的幻读现象是如何处理的，
 这篇主要就只讨论RR隔离级别下的幻读。基本不会对比着其他隔离级别以及脏读、不可重复读等现象。
 
-- [1. 一些相关的技术背景]()
-- [2. InnoDB引擎下的"幻读"]()
+- [1. 一些相关的技术背景](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%B5%85%E6%9E%90InnoDB%E4%B8%8B%E7%9A%84%E5%B9%BB%E8%AF%BB.md#1-%E4%B8%80%E4%BA%9B%E7%9B%B8%E5%85%B3%E7%9A%84%E6%8A%80%E6%9C%AF%E8%83%8C%E6%99%AF)
+- [2. InnoDB引擎下的"幻读"](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%B5%85%E6%9E%90InnoDB%E4%B8%8B%E7%9A%84%E5%B9%BB%E8%AF%BB.md#2-innodb%E5%BC%95%E6%93%8E%E4%B8%8B%E7%9A%84%E5%B9%BB%E8%AF%BB)
 - [3. 其他 & 总结]()
 
 ---
@@ -66,6 +66,8 @@ MySQL多版本并发控制实现了MVCC机制，MVCC通过MVCC使用时间戳，
 
 这次在T1 insert之前执行了一次for update的select，此时的读是当前读会读取到T2插入的数据，这时候虽然也会插入失败，好像T1事务内看起来至少合理了一些。
 但是这种操作明显不太合自然逻辑了，而这种情况如果是在T1.1操做的时刻做for update的select是没意义的，因为上面提到了**锁此时没法锁住不存在的行**。
+
+我理解这时候 for update类型的 select 更像是提供给用户用来拿到新版本数据的一个钩子，虽然这看起来和隔离的思想有些相悖了，但是这种设计必然有他的价值和适合应用场景。
 
 所以此时只要不能阻塞T2的情况下，只要T2率先插入记录，T1是必然要回滚或者失败的。除非采用读写冲突的Serializable隔离级别下。
 
