@@ -50,6 +50,8 @@ Spring作为一个应用层容器框架在设计上不太涉及底层技术，�
 <div align=center>Spring编程模型</div>
 <br>
 
+Spring有Spring框架的编程模型；Netty有Netty的编程模型；Flink也有Flink的编程模型；同时你的业务应用也应该有着贴合当前业务的良好的编程模型。
+
 ---
 
 ### 2.整合规范的能力
