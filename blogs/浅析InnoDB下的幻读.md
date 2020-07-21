@@ -10,7 +10,7 @@
 
 - [1. 一些相关的技术背景](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%B5%85%E6%9E%90InnoDB%E4%B8%8B%E7%9A%84%E5%B9%BB%E8%AF%BB.md#1-%E4%B8%80%E4%BA%9B%E7%9B%B8%E5%85%B3%E7%9A%84%E6%8A%80%E6%9C%AF%E8%83%8C%E6%99%AF)
 - [2. InnoDB引擎下的"幻读"](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%B5%85%E6%9E%90InnoDB%E4%B8%8B%E7%9A%84%E5%B9%BB%E8%AF%BB.md#2-innodb%E5%BC%95%E6%93%8E%E4%B8%8B%E7%9A%84%E5%B9%BB%E8%AF%BB)
-- [3. 其他 & 总结]()
+- [3. 其他 & 总结](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%B5%85%E6%9E%90InnoDB%E4%B8%8B%E7%9A%84%E5%B9%BB%E8%AF%BB.md#3-%E5%85%B6%E4%BB%96--%E6%80%BB%E7%BB%93)
 
 ---
 
@@ -117,7 +117,7 @@ RR隔离级别下的Next-Key锁存在一个类似升降级的过程，就是**�
 
 ---
 
-我理解 for update 类型的 select 更像是提供给用户用来拿到新版本数据的一个"钩子"，虽然这看起来和隔离的思想有些相悖了，但是这种设计必然有他的价值和适合应用场景。
+我理解的 for update 或是 lock in share mode 下的的 select 操作更像是提供给用户用来拿到新版本数据的一个"钩子"，虽然这看起来和隔离的思想有些相悖了，但是这种设计必然有他的价值和更适合应用场景。
 
 所以此时只要不能阻塞T2的情况下，只要T2率先插入记录，T1是必然要回滚或者失败的。除非采用读写冲突的Serializable隔离级别下。
 
