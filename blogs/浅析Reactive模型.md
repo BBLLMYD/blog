@@ -6,9 +6,9 @@
 
 在这篇文字中说一说我理解的反应式编程，可能有些粗浅。
 
-- [1.反应式的编程模型]()
-- [2.背压策略]()
-- [3.其他 & 总结]()
+- [1.反应式的编程模型](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%B5%85%E6%9E%90Reactive%E6%A8%A1%E5%9E%8B.md#1%E5%8F%8D%E5%BA%94%E5%BC%8F%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B)
+- [2.背压策略](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%B5%85%E6%9E%90Reactive%E6%A8%A1%E5%9E%8B.md#2%E8%83%8C%E5%8E%8B%E7%AD%96%E7%95%A5)
+- [3.其他 & 总结](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%B5%85%E6%9E%90Reactive%E6%A8%A1%E5%9E%8B.md#3%E5%85%B6%E4%BB%96--%E6%80%BB%E7%BB%93)
 
 ---
 
@@ -75,7 +75,8 @@ Reactive内部的实现也是将OS的线程池化，并在整个应用程序生�
 
 ### 3.其他 & 总结
 
-反应式编程的本质还是一种异步的**编程模型，** 
+反应式编程的本质还是一种异步的**编程模型，** 无论是从编程思想上来说，还是从与云上设施协作以及资源合理利用的角度，
+又或是与领域驱动（DDD）的方法论的结合，反应式编程都是一种很值得学习和实践的思想。
 
 
 
