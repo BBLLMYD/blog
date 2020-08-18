@@ -14,9 +14,9 @@ SPI机制在wikipedia的一段描述：
 SPI机制其实和SpringBoot的约定大约配置的思想类似，都是简化或者缺省了显示配置的步骤。
 下面分别从SPI机制的思想和一些应用示例来展开讨论和拓展一下。
 
-- [1. SPI机制的应用]()
-- [2. SPI思想的拓展]()
-- [3. 总结]()
+- [1. SPI机制的应用](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CSPI%E6%9C%BA%E5%88%B6%E2%80%9D.md#1spi%E6%9C%BA%E5%88%B6%E7%9A%84%E5%BA%94%E7%94%A8)
+- [2. SPI思想的拓展](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CSPI%E6%9C%BA%E5%88%B6%E2%80%9D.md#2spi%E6%80%9D%E6%83%B3%E7%9A%84%E6%8B%93%E5%B1%95)
+- [3. 总结](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9CSPI%E6%9C%BA%E5%88%B6%E2%80%9D.md#3%E6%80%BB%E7%BB%93)
 
 
 * * *
