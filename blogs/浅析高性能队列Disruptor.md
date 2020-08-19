@@ -1,4 +1,3 @@
-
 [Disruptor](https://github.com/LMAX-Exchange/disruptor)是一款开源的高性能的有界内存队列，
 也在各种类型的开源框架的实现中被采用，比如Spring、HBase、Storm等等。
 
