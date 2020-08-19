@@ -39,7 +39,7 @@ public AbstractSequencer(int bufferSize, WaitStrategy waitStrategy) {
 }
 ```
 
-RingBuffer中计算index的方式：array index = sequence & （array length－1）；
+RingBuffer中计算index的方式：array index = sequence & （array.length－1）;
 
 ---
 
@@ -66,7 +66,7 @@ RingBuffer中计算index的方式：array index = sequence & （array length－1
 这时候读取操作自然就大大变慢了，需要从主存中重新拉去数据，这是CPU遵循协议所规定的做法，
 但在这里的场景确实是不必要且低效的。
 
-Disruptor能够在应用层面做到更高效的利用CPU缓存，是怎么做的呢？
+Disruptor能够**在应用层面**做到更高效的利用CPU缓存，避免伪共享，是怎么做的呢？
 
 其实是在将变量所在缓存行做了隔离，方法是用一些无意义且不会再进行修改的填充变量，也是一种以空间换时间的实践。
 
