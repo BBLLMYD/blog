@@ -20,14 +20,11 @@ Disruptor的高性能的手段主要有以下几个：
 
 ```
 public AbstractSequencer(int bufferSize, WaitStrategy waitStrategy) {
-    if (bufferSize < 1) {
-        throw new IllegalArgumentException("bufferSize must not be less than 1");
-    } else if (Integer.bitCount(bufferSize) != 1) {
+    ...
+    if (Integer.bitCount(bufferSize) != 1) {
         throw new IllegalArgumentException("bufferSize must be a power of 2");
-    } else {
-        this.bufferSize = bufferSize;
-        this.waitStrategy = waitStrategy;
     }
+    ...
 }
 ```
 
