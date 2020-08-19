@@ -39,7 +39,7 @@ public AbstractSequencer(int bufferSize, WaitStrategy waitStrategy) {
 }
 ```
 
-RingBuffer就算index的方式：array index = sequence & （array length－1）；
+RingBuffer中计算index的方式：array index = sequence & （array length－1）；
 
 ---
 
