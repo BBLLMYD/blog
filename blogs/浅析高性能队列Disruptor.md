@@ -70,20 +70,17 @@ Disruptor能够**在应用层面**做到更高效的利用CPU缓存，避免伪�
 其实是在将变量所在缓存行做了隔离，方法是用一些无意义且不会再进行修改的填充变量，也是一种以空间换时间的实践。
 
 ```
-class LhsPadding
-{
+class LhsPadding{
     // 前面用来补齐缓存行的变量
     protected long p1, p2, p3, p4, p5, p6, p7;
 }
 
-class Value extends LhsPadding
-{
+class Value extends LhsPadding{
     // 真正要操作的变量
     protected volatile long value;
 }
 
-class RhsPadding extends Value
-{
+class RhsPadding extends Value{
     // 后面用来补齐缓存行的变量
     protected long p9, p10, p11, p12, p13, p14, p15;
 }
