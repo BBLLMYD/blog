@@ -102,11 +102,11 @@ class RhsPadding extends Value{
 
 - Sequence：主要职责是通过顺序递增的序号来编号管理进行交换的事件，功能上类似于AtomicLong，但是Sequence存在paddedValue用来避免伪共享
 
-- Sequencer：是一个抽象层，实现类有SingleProducerSequencer和MultiProducerSequencer，主要定义操作数据的算法，上面提到的生产流程中的例子就是一个具体的实现
+- Sequencer：是一个抽象层，实现类有SingleProducerSequencer和MultiProducerSequencer，分别用于单生产者和多生产者场景，定义操作数据的算法，下面会提到的生产流程中的例子就是一个多生产者具体的实现
 
 - WaitStrategy：定义 Consumer 如何进行等待下一个事件的策略，内置了包括自旋、休眠、直接返回等六种不同等待策略的实现
 
-- SequenceBarrier：根据给定的等待策略保持对RingBuffer已经发布的序列引用，获取可用的下标Cursor
+- SequenceBarrier：主要职责用于协调生产者与消费者，根据给定的等待策略保持对RingBuffer已经发布的序列引用，获取可用的下标Cursor，
 
 ---
 
@@ -115,10 +115,12 @@ class RhsPadding extends Value{
 CAS机制在JDK中的应用并不罕见，无论内置的锁还是显示的锁很多都有着CAS操作，
 准确说CAS更是一种的思想，也是可以直接在应用程序中体现的，
 
-对于生产者入队而言，由于内存是复用的，最主要的操作是不能消费没有覆盖的元素。
-对于消费者出队而言，要注意的是不能读取没有写入的元素。
+对于生产者入队而言，由于内存是复用的，**最主要的操作是不能消费没有覆盖的元素。**
 
-- 生产部分逻辑
+对于消费者出队而言，**要注意的是不可以读取没有写入的元素。**
+
+
+#### 生产主要逻辑
 
 下面是在 com.lmax.disruptor.MultiProducerSequencer 多生产者的实现中生产者入队过程的核心代码，
 主要流程是如果没有足够的空余位置，就用 LockSupport.parkNanos(1) 出让CPU的使用权，
@@ -129,23 +131,31 @@ CAS机制在JDK中的应用并不罕见，无论内置的锁还是显示的锁�
 do {
   // 指向上次生产到的位置
   current = cursor.get();
+  
   // 增量生产传入的个数
   next = current + n;
+  
   // 减掉一圈循环，用来判断消费者是否超过了消费者
   long wrapPoint = next - bufferSize;
+  
   // 整个seq是递增，所以获取上一次的最小消费位置
   long cachedGatingSequence = gatingSequenceCache.get();
+  
   // 如果没有满足的空余位置
   if (wrapPoint>cachedGatingSequence || cachedGatingSequence>current){
+  
     // 有些消费者消费的可能比较慢，生产者就必须等待最慢的消费者，重新计算所有消费者里面的最小值位置
     long gatingSequence = Util.getMinimumSequence(gatingSequences, current);
+    
     // 生产者已经从后面追过消费者，所以此时仍然没有满足的空余位置，出让CPU，再执行下一次循环尝试
     if (wrapPoint > gatingSequence){
       LockSupport.parkNanos(1); // TODO, should we spin based on the wait strategy?
       continue;
     }
+    
     // 从新设置上一次的最小消费位置
     gatingSequenceCache.set(gatingSequence);
+    
   } else if (cursor.compareAndSet(current, next)){
     // CAS获取写入位置成功
     break;
@@ -155,9 +165,10 @@ do {
 ```
 
 上面是生产者对新Event获得一个"槽位"的主要流程，后面还有写avaliableBuffer的步骤以及 publish(sequence) 进行提交，
-上面的流程总体看下来有点类似于分布式事务的两阶段提交的步骤。
+上面的流程总体看下来有点类似于分布式事务的两阶段提交的步骤，第一阶段是先在环形队列中预占个"槽位"，竞争只发生在第一阶段，使用CAS操作来解决冲突，
+第二阶段是向这个空位中写入数据。
 
-- 消费部分逻辑
+#### 消费主要逻辑
 
 Disruptor支持批量消费，这也是高吞吐率的一个原因，下面看一下BatchEventProcessor的实现中的消费流程。
 
