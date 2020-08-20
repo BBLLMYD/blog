@@ -35,7 +35,7 @@ Spring作为一个如次受欢迎的应用层框架，有着很多用着很舒�
 
 > 模型 -> 接口 -> 实现
 
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/14/1402.png?raw=true" alt="Spring编程模型" width="666"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/14/1402.png?raw=true" alt="Spring编程模型" width="677"></div>
 <div align=center>Spring编程模型</div>
 <br>
 
@@ -51,7 +51,7 @@ Flink也有Flink的编程模型；<br>
 我认为Spring的成功很大程度上得益于整体模型的良好设计以及**对各个方向的规范进行的整合，**
 也正是这些内容才促成了一定程度的"面向Spring"编程的现象。
 
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/14/1401.png?raw=true" alt="Spring规范整合" width="666"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/14/1401.png?raw=true" alt="Spring规范整合" width="677"></div>
 <div align=center>Spring规范整合</div>
 <br>
 
