@@ -10,8 +10,7 @@ Disruptor不是分布式组件，而是在进程内的一个高性能队列，�
 - [2. 提升CPU缓存利用率]()
 - [3. CAS机制以及生产 & 消费流程]()
 - [4. Disruptor主要组件]()
-- [5. 生产 & 消费流程]()
-- [6. 总结]()
+- [5. 总结]()
 
 ---
 
@@ -98,6 +97,9 @@ class RhsPadding extends Value
 CAS机制在JDK中的应用并不罕见，无论内置的锁还是显示的锁很多都有着CAS操作，
 准确说CAS更是一种的思想，也是可以直接在应用程序中体现的，
 
+对于生产者入队而言，由于内存是复用的，最主要的操作是不能消费没有覆盖的元素。
+对于消费者出队而言，要注意的是不能读取没有写入的元素。
+
 下面是在 com.lmax.disruptor.MultiProducerSequencer 多生产者的实现中生产者入队过程的核心代码，
 主要流程是如果没有足够的空余位置，就用 LockSupport.parkNanos(1) 出让CPU的使用权，
 避免当前出现线程总是空转，如果有的话CAS方式抢占位置。
@@ -132,10 +134,25 @@ do {
 
 ```
 上面是生产者对新Event获得一个"槽位"的主要流程，后面还有写avaliableBuffer的步骤以及 publish(sequence) 进行提交，
+上面的流程总体看下来有点类似于分布式事务的两阶段提交方案，
 
 ---
 
 ### 4. Disruptor主要组件
+
+- RingBuffer：主要职责是负责Disruptor中数据/事件的存储和更新
+
+- Event：生产者和消费者之间进行交换的数据被称为事件
+
+- EventProcessor：持有特定消费者的 Sequence，并提供用于调用事件处理实现的事件循环
+
+- EventHandler：用于处理事件，是 Consumer 的逻辑实现
+
+- Sequence：主要职责是通过顺序递增的序号来编号管理进行交换的事件，功能上类似于AtomicLong，但是Sequence存在paddedValue用来避免伪共享
+
+- Sequencer：是一个抽象层，实现类有SingleProducerSequencer和MultiProducerSequencer，主要定义操作数据的算法，上面提到的生产流程中的例子就是一个具体的实现
+
+- WaitStrategy：定义 Consumer 如何进行等待下一个事件的策略，内置了六种不同等待策略的实现
 
 ---
 
