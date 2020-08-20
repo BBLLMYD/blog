@@ -4,10 +4,10 @@
 从分布上看，Java业务后台在基于Spring生态下的编程是最常见的，
 Spring优秀的设计已经让Spring成为了大多数业务后台技术选型的第一或者默认的选择。
 
+> Spring框架是 Java 平台的一个开源的全栈（Full-stack）应用程序框架和控制反转容器实现，一般被直接称为 Spring。该框架的一些核心功能理论上可用于任何 Java 应用，但 Spring 还为基于Java企业版平台构建的 Web 应用提供了大量的拓展支持。
+
 关于Spring的源码，或者说不管是啥开源项目的源码，个人认为认为一定是要有目的的去看，
 而且有个重要的前置条件就是对正在看源码的系统功能的应用程度，是需要有一定程度的熟练的。这样才能知道你在看的是什么。
-
-> Spring框架是 Java 平台的一个开源的全栈（Full-stack）应用程序框架和控制反转容器实现，一般被直接称为 Spring。该框架的一些核心功能理论上可用于任何 Java 应用，但 Spring 还为基于Java企业版平台构建的 Web 应用提供了大量的拓展支持。
 
 我认为对于读源码的目的，就是提炼出优秀部分的设计的思想再加以应用。
 比如Spring中有很多处优雅的抽象和设计，**而把它这些设计的思想再抽象出来，
@@ -15,10 +15,10 @@ Spring优秀的设计已经让Spring成为了大多数业务后台技术选型�
 
 这篇文章尝试主要从下面的几个角度来分别讨论关于Spring的设计。
 
-- [1. Spring的编程模型]()
-- [2. Spring的规范整合]()
-- [3. Spring的扩展点]()
-- [4. 总结]()
+- [1. Spring的编程模型](https://github.com/BBLLMYD/blog/blob/master/blogs/%E5%85%B3%E4%BA%8E%E9%9D%A2%E5%90%91Spring%E7%BC%96%E7%A8%8B.md#1-spring%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B)
+- [2. Spring的规范整合](https://github.com/BBLLMYD/blog/blob/master/blogs/%E5%85%B3%E4%BA%8E%E9%9D%A2%E5%90%91Spring%E7%BC%96%E7%A8%8B.md#2-spring%E7%9A%84%E8%A7%84%E8%8C%83%E6%95%B4%E5%90%88)
+- [3. Spring的扩展点](https://github.com/BBLLMYD/blog/blob/master/blogs/%E5%85%B3%E4%BA%8E%E9%9D%A2%E5%90%91Spring%E7%BC%96%E7%A8%8B.md#3-spring%E7%9A%84%E6%89%A9%E5%B1%95%E7%82%B9)
+- [4. 总结](https://github.com/BBLLMYD/blog/blob/master/blogs/%E5%85%B3%E4%BA%8E%E9%9D%A2%E5%90%91Spring%E7%BC%96%E7%A8%8B.md#4-%E6%80%BB%E7%BB%93)
 
 ---
 
