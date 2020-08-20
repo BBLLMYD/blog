@@ -39,7 +39,10 @@ Spring作为一个如次受欢迎的应用层框架，有着很多用着很舒�
 <div align=center>Spring编程模型</div>
 <br>
 
-Spring有Spring框架的编程模型；Netty有Netty的编程模型；Flink也有Flink的编程模型；同时你的业务应用也应该有着贴合当前业务的良好的编程模型。
+Spring有Spring框架的编程模型；<br>
+Netty有Netty的编程模型；<br>
+Flink也有Flink的编程模型；<br>
+业务应用也应该有着贴合当前业务的良好可扩展的编程模型。
 
 ---
 
