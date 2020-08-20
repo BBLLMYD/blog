@@ -8,8 +8,8 @@ Disruptor不是分布式组件，而是在进程内的一个高性能队列，�
 
 - [1. 更高效的内存利用](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%B5%85%E6%9E%90%E9%AB%98%E6%80%A7%E8%83%BD%E9%98%9F%E5%88%97Disruptor.md#1-%E6%9B%B4%E9%AB%98%E6%95%88%E7%9A%84%E5%86%85%E5%AD%98%E5%88%A9%E7%94%A8)
 - [2. 提升CPU缓存利用率](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%B5%85%E6%9E%90%E9%AB%98%E6%80%A7%E8%83%BD%E9%98%9F%E5%88%97Disruptor.md#2-%E6%8F%90%E5%8D%87cpu%E7%BC%93%E5%AD%98%E5%88%A9%E7%94%A8%E7%8E%87)
-- [3. Disruptor主要组件]()
-- [4. CAS机制以及生产 & 消费流程]()
+- [3. Disruptor主要组件](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%B5%85%E6%9E%90%E9%AB%98%E6%80%A7%E8%83%BD%E9%98%9F%E5%88%97Disruptor.md#3-disruptor%E4%B8%BB%E8%A6%81%E7%BB%84%E4%BB%B6)
+- [4. CAS机制以及生产 & 消费流程](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%B5%85%E6%9E%90%E9%AB%98%E6%80%A7%E8%83%BD%E9%98%9F%E5%88%97Disruptor.md#4-cas%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E7%94%9F%E4%BA%A7--%E6%B6%88%E8%B4%B9%E6%B5%81%E7%A8%8B)
 - [5. 总结](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%B5%85%E6%9E%90%E9%AB%98%E6%80%A7%E8%83%BD%E9%98%9F%E5%88%97Disruptor.md#5-%E6%80%BB%E7%BB%93)
 
 ---
