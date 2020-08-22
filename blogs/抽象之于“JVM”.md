@@ -146,7 +146,7 @@ Java内存模型对一些指令集要求必须保证原子性，
 对于以上基础特性不同程度的实现可以灵活的满足我们不同的并发场景。
 
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/02/2-9.png?raw=true" width="777"></div>
-<div align=center>关于"内存模型"</div>
+<div align=center>内存模型</div>
 
 
 ### 4.关于“运行期优化”
@@ -170,7 +170,7 @@ JVM在运行期的优化手段层出不穷，从各种场景进行了聪明的�
 虽然我们也许很少机会能干预到这些后端编译优化的过程，但是**了解其机制**可能会让我们能够编写出和优化机制友好的代码。
 
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/02/2-11.png?raw=true" width="555"></div>
-<div align=center>关于"运行期优化"</div>
+<div align=center>运行期优化</div>
 
 
 ### 5.关于“垃圾收集”
@@ -199,7 +199,7 @@ JVM在运行期的优化手段层出不穷，从各种场景进行了聪明的�
 随着JVM版本的迭代，包括内存划分的规则等可能都会变化，收集器也在不断更迭，
 可能会出现旧版本启动参数对新版本已经不适用的现象，需要随着关注。
 
-没有显式指定的时候JVM有默认比较适普的策略，所以当脱离了具体场景时，指定方案并不存在一个“最佳实践”，而一定是灵活的。
+没有显式指定的时候JVM有默认比较适普的策略，所以当脱离了具体场景时的方案并不存在一个“最佳实践”，而一定是以灵活为原则。
 
 <div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/02/2-13.png?raw=true" width="444"></div>
     
