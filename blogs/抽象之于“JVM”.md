@@ -219,7 +219,7 @@ JDK本身为我们提供了各个查看各个维度信息很好用的原生工�
 从排查过程来讲，**对JVM知识的了解是一个基础支撑，堆栈数据、GClog作为数据，JVM工具和操作系统知识就是助手**
 ，流程上需要们对各个环节都有足够充分的了解和累积才可以。
 
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/02/2-12-1.png?raw=true" width="777"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/02/2-12-1.png?raw=true" width="789"></div>
 
 
 ### 7.其他 & 总结
