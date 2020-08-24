@@ -4,10 +4,11 @@
 
 但是从SPI名字的全称（Service Provider Interface）就可以看出来，**SPI是一种面向接口/服务的扩展机制**。
 而Java作为一种有着运行时动态分派特性的语言，面向对象/接口编程易扩展的特性也正是其优势。
-**所以我认为与其说SPI是一种机制，不如说SPI实际上是利用Java语言特性而做的一种实现上的约定或者规范模式。**
-SPI是体现Java语言特性和抽象思想的一个典范。
 
-SPI机制在wikipedia的一段描述：
+所以我认为与其说SPI是一种机制，不如说SPI实际上是利用Java语言特性而做的一种实现上的约定或者规范模式。
+**SPI机制是体现Java语言特性和抽象思想的一个典范**。
+
+SPI机制在维基百科：
 
 > A service is a well-known set of interfaces and (usually abstract) classes. A service provider is a specific implementation of a service. The classes in a provider typically implement the interfaces and subclass the classes defined in the service itself. Service providers can be installed in an implementation of the Java platform in the form of extensions, that is, jar files placed into any of the usual extension directories. Providers can also be made available by adding them to the application's class path or by some other platform-specific means.
 
@@ -100,6 +101,7 @@ ServiceLoader本身其实就是一个java.lang.Iterable接口的实现，会来�
 Dubbo没有使用Java原生的SPI机制，是对其进行了多维度的增强，
 除了支持原来的加载接口实现类，还增加了Dubbo的IOC和AOP等特性，
 并且对**JDK SPI实现中的不能按需加载、灵活度较弱、线程安全、异常机制等一些不够充分全面的实现部分都做了更升级的优化处理**。
+
 Dubbo采用SPI机制实现了在注册中心、监控中心、网络传输、负载均衡等等几乎RPC所有相关组件基于抽象层的扩展方式。
 
 
@@ -110,7 +112,7 @@ Dubbo采用SPI机制实现了在注册中心、监控中心、网络传输、负
 
 具体的Dubbo SPI介绍可以直接看Dubbo官方文档
 的[开发者指南](http://dubbo.apache.org/zh-cn/docs/source_code_guide/dubbo-spi.html)及[源码导读](http://dubbo.apache.org/zh-cn/docs/source_code_guide/dubbo-spi.html)部分。
-文档中不仅有对框架本身设计的说明，同时包含很多设计上的理念，这些内容对我们学习框架本身以及框架之外的设计思想都是很有启发的。
+文档中不仅有对框架本身设计的说明，同时包含很多设计上的理念，这些内容对学习框架本身以及框架之外的设计思想都是很有启发。
 
 * * *
 
@@ -118,6 +120,7 @@ Dubbo采用SPI机制实现了在注册中心、监控中心、网络传输、负
 
 SPI本质上就是把抽象层和实现层分离，并且约定注册方式的一种方案。
 实际上这种思想在Java的开源项目里是很常见到的，因为这种思想天然符合Java的语言特性。
+
 不仅是在RPC场景有比较天然的服务注册和发现，
 其实Spring、SpringBoot或者一些工具的集成插件都直接应用着SPI机制或间接用着SPI机制设计的模式。
 
