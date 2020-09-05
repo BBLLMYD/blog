@@ -4,6 +4,8 @@
 
 ## items
 
+---
+
 - #### 找到规律，抽象出模式
 
    - ##### [抽象之于“局部性原理”](https://github.com/BBLLMYD/blog/blob/master/blogs/%E6%8A%BD%E8%B1%A1%E4%B9%8B%E4%BA%8E%E2%80%9C%E5%B1%80%E9%83%A8%E6%80%A7%E5%8E%9F%E7%90%86%E2%80%9D.md)
