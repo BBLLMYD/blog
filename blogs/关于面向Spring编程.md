@@ -13,6 +13,9 @@ Spring优秀的设计已经让Spring成为了大多数业务后台技术选型�
 比如Spring中有很多处优雅的抽象和设计，**而把它这些设计的思想再抽象出来，
 而能够合理舒适的在我们当下的业务系统等的场景再具体应用，** 学以致用可能会更加深理解。
 
+用马老板的话说，**Spring的出现并不是必然，IOC和AOP模式的出现是必然。
+实现IOC和AOP的可能是Spring，也可能是Summer，或者是Autumn。**
+
 这篇文章尝试主要从下面的几个角度来分别讨论关于Spring的设计。
 
 - [1. Spring的编程模型](https://github.com/BBLLMYD/blog/blob/master/blogs/%E5%85%B3%E4%BA%8E%E9%9D%A2%E5%90%91Spring%E7%BC%96%E7%A8%8B.md#1-spring%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B)
