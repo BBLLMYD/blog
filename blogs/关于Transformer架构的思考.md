@@ -191,5 +191,5 @@ Transformer架构中，给了每个词向量一个位置编码，再通过预先
 这个过程做的事情就是形成Attention注意力机制的基础。多头注意力就可以理解为经过多次权重矩阵的计算生成多组计算结果，然后经过多次学习后得到的向量结果再进行拼接，形成了更灵活的多头注意力。
 
 <br>
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/shang/shang333.jpg?raw=true" width="456"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/15/Transformer2.png?raw=true" width="678"></div>
 <br>
