@@ -207,7 +207,7 @@ Transformer[论文](https://arxiv.org/abs/1706.03762?utm_source=chatgpt.com)
 然后经过多次学习后得到的向量结果再进行拼接，形成了更灵活强大的多头注意力。
 
 <br>
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/15/Transformer4.png?raw=true" width="678"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/15/Transformer4.png?raw=true" width="567"></div>
 <br>
 
 
