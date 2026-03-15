@@ -7,7 +7,9 @@
 - #### 整点有用的
 
     - ##### [从工程视角对Transformer架构的思考](https://github.com/BBLLMYD/blog/blob/master/blogs/%E5%85%B3%E4%BA%8ETransformer%E6%9E%B6%E6%9E%84%E7%9A%84%E6%80%9D%E8%80%83.md)
-    - ##### [何为上下文工程]()
+    - ##### [如何理解上下文工程](https://github.com/BBLLMYD/blog/blob/master/blogs/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B.md)
+    - ##### [AI应用的准出测评和持续性]()
+    - ##### [AI应用工程建设维度]()
 
 ---
 
