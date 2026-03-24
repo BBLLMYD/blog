@@ -11,7 +11,7 @@
 静态模型本身表现可以进行单轮测评看输出效果，模型和Agent应用的多轮评估也可以以自动化形式进行，而且Agent应用的写任务执行是**可能影响当前环境的上下文**。
 
 <br>
-<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/16/img_7.png?raw=true" width="777"></div>
+<div align=center><img src="https://github.com/BBLLMYD/blog/blob/master/images/16/img_8.png?raw=true" width="777"></div>
 <br>
 
 
