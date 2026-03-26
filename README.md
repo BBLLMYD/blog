@@ -9,6 +9,7 @@
     - ##### [从工程视角对Transformer架构的思考](https://github.com/BBLLMYD/blog/blob/master/blogs/%E5%85%B3%E4%BA%8ETransformer%E6%9E%B6%E6%9E%84%E7%9A%84%E6%80%9D%E8%80%83.md)
     - ##### [如何理解上下文工程](https://github.com/BBLLMYD/blog/blob/master/blogs/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B.md)
     - ##### [AI应用的准出测评和持续性](https://github.com/BBLLMYD/blog/blob/master/blogs/AI%E5%BA%94%E7%94%A8%E7%9A%84%E5%87%86%E5%87%BA%E6%B5%8B%E8%AF%84%E5%92%8C%E6%8C%81%E7%BB%AD%E6%80%A7.md)
+    - ##### [系统/架构/组织中的一致性]()
 
 ---
 
